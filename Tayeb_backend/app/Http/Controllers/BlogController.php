@@ -50,8 +50,8 @@ class BlogController extends Controller
     // This method will store a blog
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|min:10',
-            'author' => 'required|min:3'
+            'title' => 'required|min:1',
+            'author' => 'required|min:1'
         ]);
 
         if ($validator->fails()) {
@@ -107,8 +107,8 @@ class BlogController extends Controller
         } 
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|min:10',
-            'author' => 'required|min:3'
+            'title' => 'required|min:1',
+            'author' => 'required|min:1'
         ]);
 
         if ($validator->fails()) {
