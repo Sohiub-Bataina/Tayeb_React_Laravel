@@ -15,7 +15,7 @@ function App() {
     <>
         <div className='bg-dark text-center py-2 shadow-lg'>
             <h1 className='text-white'>React & Laravel Blog App</h1>
-        </div>
+        </div>l
         <Routes>
             <Route path='/' element={ <Blogs />} />
             <Route path='/create' element={ <CreateBlog />} />
