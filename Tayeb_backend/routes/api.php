@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TempImageController;
+use App\Http\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +27,18 @@ Route::post('save-temp-image',[TempImageController::class,'store']);
 Route::get('blogs/{id}',[BlogController::class,'show']);
 Route::put('blogs/{id}',[BlogController::class,'update']);
 Route::delete('blogs/{id}',[BlogController::class,'destroy']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/signup', [AuthController::class, 'signup']);
 
+// Route::post('register',[ApiController::class,'register']);
+// Route::post('login',[ApiController::class,'Login']);
+// Route::group([
+//  'middlewere' => ['auth:sanctum']],function(){
+//     Route::get('profile',[ApiController::class,'profile']);
+//     Route::get('logout',[ApiController::class,'logout']);
+//  }
+// );
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
