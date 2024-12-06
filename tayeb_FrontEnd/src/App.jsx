@@ -10,6 +10,8 @@ import EditBlog from './components/EditBlog';
 import FavoritesPage from './components/FavoritesPage';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
+import Footer from './components/Footer'; // استيراد الفوتر
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   const [favorites, setFavorites] = useState([]); 
@@ -25,13 +27,9 @@ function App() {
 
   return (
     <>
-      {/* <div className="bg-dark text-center py-2 shadow-lg">
-        <h1 className="text-white">React & Laravel Blog App</h1>
-      </div> */}
-
       {/* Navbar */}
       <Navbar />
-     <HeroSection />
+      <HeroSection />
      
       <Routes>
         <Route path="/" element={<Blogs />} />
@@ -42,6 +40,9 @@ function App() {
       </Routes>
 
       <ToastContainer />
+      
+      {/* Footer */}
+      <Footer />
     </>
   );
 }
