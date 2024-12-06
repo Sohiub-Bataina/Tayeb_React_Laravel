@@ -49,7 +49,11 @@ const LoginForm = ({ onSwitchToSignup }) => {
       });
   
       const token = response.data.token;
+    //   const userId = response.data.users.id; // Adjust based on your API response
+  
+      // Store token and user ID in local storage
       localStorage.setItem("authToken", token);
+    //   localStorage.setItem("userId", userId);
       setSuccessMessage("Login successful!");
       navigate("/"); // Redirect to Hero page
     } catch (error) {
