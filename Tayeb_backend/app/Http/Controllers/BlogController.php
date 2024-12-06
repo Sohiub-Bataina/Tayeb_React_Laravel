@@ -67,6 +67,8 @@ class BlogController extends Controller
         $blog->author = $request->author;
         $blog->description = $request->description;
         $blog->shortDesc = $request->shortDesc;
+        $blog->categories = $request->categories ?? 'salads'; // Set default value if not provided
+        $blog->create_user_id = $request->create_user_id ?? 1; // Default to 1 if not provided
         $blog->save();
 
         // Save Image Here
