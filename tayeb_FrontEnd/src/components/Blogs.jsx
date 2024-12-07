@@ -63,7 +63,7 @@ const Blogs = () => {
         <div className='container pt-5'>
             {/* الشريط العلوي */}
             <div className="row mb-4 align-items-center">
-                <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
+            <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
                     <form onSubmit={searchBlogs} className="d-flex">
                         <input
                             type="text"
@@ -83,7 +83,7 @@ const Blogs = () => {
                     </form>
                 </div>
                 <div className="col-lg-6 col-md-4 col-sm-12 d-flex justify-content-end">
-                <a onClick={goToCreate} className='btn btn-dark'>Create</a>
+                    <a onClick={goToCreate} className='btn btn-dark'>Create</a>
                 </div>
             </div>
 
