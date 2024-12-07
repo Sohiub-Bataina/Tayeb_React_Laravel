@@ -1,124 +1,125 @@
 /* Reset for consistent appearance across browsers */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #333; */
+    color: #fff;
+    /* background-image: url("src/assets/images/bg_1.jpg"); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+  }
+  
+  /* Header styling */
+  header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background-image: url("../assets/images/bg_1.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  position: relative;
-}
-
-/* Header styling */
-header {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 40px;
-  background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo img {
-  height: 50px;
-  width: auto;
-  margin-right: 10px;
+.logo i {
+    font-size: 28px; /* Adjust the size of the icon to match the font size */
+    margin-right: 10px; /* Space between the icon and text */
+    color: #fbb03b; /* Match the color with the text */
 }
 
 .logo h2 {
-  font-size: 28px;
-  font-weight: bold;
-  color: #fbb03b;
+    font-size: 28px; /* Ensure the font size matches the icon size */
+    font-weight: bold;
+    color: #fbb03b;
+    margin: 0; /* Remove any default margin */
 }
-
-/* Centered navigation links */
-.links {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-  flex-grow: 1;
-  justify-content: center;
-}
-
-.links li a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.links li a:hover {
-  color: #fbb03b;
-}
-
-/* Login and Registration Buttons */
-.action-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.action-buttons .btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #fbb03b;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.action-buttons .btn:hover {
-  background-color: #333;
-  color: #fbb03b;
-}
-
-/* Responsive adjustments */
-.hamburger-btn {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: #fff;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-}
-
-main h1 {
-  font-size: 50px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 1.2;
-  color: #000000;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.945), 
-               -2px -2px 5px rgba(255, 255, 255, 0.3);
+  
+  /* Centered navigation links */
+  .links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    flex-grow: 1;
+    justify-content: center; /* Center links */
+  }
+  
+  .links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .links li a:hover {
+    color: #fbb03b;
+  }
+  
+  /* Login and Registration Buttons */
+  .action-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .action-buttons .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #fbb03b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-buttons .btn:hover {
+    background-color: #333;
+    color: #fbb03b;
+  }
+  
+  /* Responsive adjustments */
+  .hamburger-btn {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  main h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: #000000;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.945), 
+                 -2px -2px 5px rgba(255, 255, 255, 0.3); /* ظل مزدوج لجعل النص بارزًا */
 }
 
 main p {

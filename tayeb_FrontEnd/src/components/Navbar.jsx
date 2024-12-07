@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css"; // Adjust the path as needed
-import logo from "../assets/images/bg_1.jpg"; // Replace with your logo
-
-import { Link } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,40 +9,35 @@ function Navbar() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <>
-      <header>
-        <nav className="navbar">
-          {/* Logo on the top left */}
-          <a href="#" className="logo">
-            <img src={logo} alt="logo" />
-            <h2>Tayeb</h2>
-          </a>
+    <header>
+      <nav className="navbar">
+        {/* Logo */}
+        <div className="logo">
+          <i className="fas fa-utensils me-2"></i>
+          <h2>Tayeb</h2>  
+        </div>
 
-          {/* Navigation links in the middle */}
-          <span className="hamburger-btn" onClick={toggleMenu}>
-            ☰
-          </span>
-          <ul className={`links ${menuOpen ? "show" : ""}`}>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">Contact</a></li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-          </ul>
+        {/* Hamburger menu for small screens */}
+        <span className="hamburger-btn" onClick={toggleMenu}>
+          ☰
+        </span>
 
-          {/* Login/Registration buttons on the right */}
-          <div className="action-buttons">
-            <button className="btn">Login</button>
-            <button className="btn">Register</button>
-          </div>
-        </nav>
-      </header>
-     
-    </>
+        {/* Navigation links */}
+        <ul className={`links ${menuOpen ? "show" : ""}`}>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/pages">Pages</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+        </ul>
+        
+        
+        {/* Login/Registration buttons */}
+        <div className="action-buttons">
+          <button className="btn">Login</button>
+          <button className="btn">Register</button>
+        </div>
+      </nav>
+    </header>
   );
 }
 
