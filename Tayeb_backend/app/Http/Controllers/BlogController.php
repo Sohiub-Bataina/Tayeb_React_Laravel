@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\TempImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -12,11 +13,10 @@ class BlogController extends Controller
 {
     // This method will return all blogs
     public function index(Request $request) {        
-
-        $blogs = Blog::orderBy('created_at','DESC');
+        $blogs = Blog::orderBy('created_at', 'DESC');
 
         if (!empty($request->keyword)) {
-            $blogs = $blogs->where('title','like','%'.$request->keyword.'%');
+            $blogs = $blogs->where('title', 'like', '%' . $request->keyword . '%');
         }
 
         $blogs = $blogs->get();
@@ -44,14 +44,13 @@ class BlogController extends Controller
             'status' => true,
             'data' => $blog,
         ]);
-
     }
 
     // This method will store a blog
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:1',
-            'author' => 'required|min:1'
+            'author' => 'required|min:3'
         ]);
 
         if ($validator->fails()) {
@@ -62,29 +61,40 @@ class BlogController extends Controller
             ]);
         }
 
+        $user = User::find($request->create_user_id ?? 1);
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found.',
+            ]);
+        }
+
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->author = $request->author;
-        $blog->description = $request->description;
-        $blog->shortDesc = $request->shortDesc;
+        $blog->description = $request->description ?? ''; // Default to empty string if not provided
+        $blog->shortDesc = $request->shortDesc ?? ''; // Default to empty string if not provided
+        $blog->categories = $request->categories ?? 'salads'; // Set default value if not provided
+        $blog->create_user_id = $user->id;
+        $blog->image = $request->image ?? null; // Default to null if not provided
         $blog->save();
 
         // Save Image Here
         $tempImage = TempImage::find($request->image_id);
 
         if ($tempImage != null) {
-
-            $imageExtArray = explode('.',$tempImage->name);
+            $imageExtArray = explode('.', $tempImage->name);
             $ext = last($imageExtArray);
-            $imageName = time().'-'.$blog->id.'.'.$ext;
+            $imageName = time() . '-' . $blog->id . '.' . $ext;
 
             $blog->image = $imageName;
             $blog->save();
 
-            $sourcePath = public_path('uploads/temp/'.$tempImage->name);
-            $destPath = public_path('uploads/blogs/'.$imageName);
+            $sourcePath = public_path('uploads/temp/' . $tempImage->name);
+            $destPath = public_path('uploads/blogs/' . $imageName);
 
-            File::copy($sourcePath,$destPath);
+            File::copy($sourcePath, $destPath);
         }
 
         return response()->json([
@@ -96,7 +106,6 @@ class BlogController extends Controller
 
     // This method will update a blog
     public function update($id, Request $request) {
-
         $blog = Blog::find($id);
 
         if ($blog == null) {
@@ -104,7 +113,7 @@ class BlogController extends Controller
                 'status' => false,
                 'message' => 'Blog not found.',
             ]);
-        } 
+        }
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:1',
@@ -121,29 +130,31 @@ class BlogController extends Controller
 
         $blog->title = $request->title;
         $blog->author = $request->author;
-        $blog->description = $request->description;
-        $blog->shortDesc = $request->shortDesc;
+        $blog->description = $request->description ?? $blog->description; // Keep existing value if not provided
+        $blog->shortDesc = $request->shortDesc ?? $blog->shortDesc; // Keep existing value if not provided
+        $blog->categories = $request->categories ?? 'salads'; // Set default value if not provided
+        $blog->create_user_id = $request->create_user_id ?? $blog->create_user_id; // Keep existing value if not provided
+        $blog->image = $request->image ?? $blog->image; // Keep existing value if not provided
         $blog->save();
 
         // Save Image Here
         $tempImage = TempImage::find($request->image_id);
 
         if ($tempImage != null) {
-
             // Delete old image here
-            File::delete(public_path('uploads/blogs/'.$blog->image));
+            File::delete(public_path('uploads/blogs/' . $blog->image));
 
-            $imageExtArray = explode('.',$tempImage->name);
+            $imageExtArray = explode('.', $tempImage->name);
             $ext = last($imageExtArray);
-            $imageName = time().'-'.$blog->id.'.'.$ext;
+            $imageName = time() . '-' . $blog->id . '.' . $ext;
 
             $blog->image = $imageName;
             $blog->save();
 
-            $sourcePath = public_path('uploads/temp/'.$tempImage->name);
-            $destPath = public_path('uploads/blogs/'.$imageName);
+            $sourcePath = public_path('uploads/temp/' . $tempImage->name);
+            $destPath = public_path('uploads/blogs/' . $imageName);
 
-            File::copy($sourcePath,$destPath);
+            File::copy($sourcePath, $destPath);
         }
 
         return response()->json([
@@ -153,9 +164,8 @@ class BlogController extends Controller
         ]);
     }
 
-     // This method will delete a blog
-     public function destroy($id) {
-
+    // This method will delete a blog
+    public function destroy($id) {
         $blog = Blog::find($id);
 
         if ($blog == null) {
@@ -166,16 +176,14 @@ class BlogController extends Controller
         }
 
         // Delete blog image first
-        File::delete(public_path('uploads/blogs/'.$blog->image));
+        File::delete(public_path('uploads/blogs/' . $blog->image));
 
         // Delete blog from DB
         $blog->delete();
 
         return response()->json([
             'status' => true,
-            'message' => 'Blog deleted successfully.'            
+            'message' => 'Blog deleted successfully.'
         ]);
-
-     }
-
+    }
 }

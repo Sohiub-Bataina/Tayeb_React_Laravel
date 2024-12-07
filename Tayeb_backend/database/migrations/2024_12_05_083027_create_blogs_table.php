@@ -12,13 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blogs', function (Blueprint $table) {
+            $table->engine = 'InnoDB'; // Set the table engine to InnoDB
             $table->id();
             $table->string('title');
             $table->string('shortDesc')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->string('author');
+            $table->enum('categories', ['desserts', 'main_dish', 'salads']); // Add categories column
+            $table->unsignedBigInteger('create_user_id'); // Add create_user_id column
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('create_user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

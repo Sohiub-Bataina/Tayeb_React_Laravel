@@ -2,16 +2,23 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 import Blogs from './components/Blogs';
+import Navbar from './components/Navbar';
 import CreateBlog from './components/CreateBlog';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BlogDetail from './components/BlogDetail';
 import EditBlog from './components/EditBlog';
 import FavoritesPage from './components/FavoritesPage';
-import Navbar from './components/Navbar';
+
 import HeroSection from './components/HeroSection';
+
 import Footer from './components/Footer'; // استيراد الفوتر
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
+import AuthForm from './components/AuthForm';
+import Profile from './components/Profile';
+
+
 
 function App() {
   const [favorites, setFavorites] = useState([]); 
@@ -37,12 +44,19 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetail onToggleFavorite={toggleFavorite} />} />
         <Route path="/blog/edit/:id" element={<EditBlog />} />
         <Route path="/favorites" element={<FavoritesPage favorites={favorites} />} />
+        <Route path='/login' element={ <AuthForm />} />
+        <Route path='/profile' element={ <Profile />} />
       </Routes>
 
       <ToastContainer />
+
       
       {/* Footer */}
       <Footer />
+
+       
+     
+
     </>
   );
 }
