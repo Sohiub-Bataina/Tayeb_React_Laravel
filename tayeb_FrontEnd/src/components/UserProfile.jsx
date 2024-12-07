@@ -42,7 +42,13 @@ const UserProfile = () => {
             Authorization: `Bearer YOUR_ACCESS_TOKEN`, // ضع التوكن إذا كان مطلوبًا
           },
         });
-        setUserBlogs(blogsResponse.data.data); // تعيين المدونات الخاصة بالمستخدم
+        const filteredBlogs = blogsResponse.data.data.filter(
+          (blog) => blog.create_user_id === parseInt(userId) // Ensure userId matches data type
+        );
+        
+        setUserBlogs(filteredBlogs); // Assign filtered blogs to state
+       
+        console.log('Blogs Response:', blogsResponse.data); // Log the blogs response
       } catch (err) {
         setError('Failed to fetch user data or blogs');
         console.error(err);
