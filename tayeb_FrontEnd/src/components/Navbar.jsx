@@ -79,10 +79,10 @@ function Navbar() {
             ☰
           </span>
           <ul className={`links ${menuOpen ? "show" : ""}`}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/pages">Pages</Link></li>
-          <li><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
+          <li className="nav-item"><Link to="/">Home</Link></li>
+          <li className="nav-item"><Link to="/about">About</Link></li>
+          <li className="nav-item"><Link to="/pages">Pages</Link></li>
+          <li className="nav-item"><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
        
 
             {/* Conditionally render login/logout buttons */}
