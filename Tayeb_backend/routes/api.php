@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TempImageController;
 use App\Http\Controllers\API\ApiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -35,6 +36,9 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::post('/users', [UserController::class, 'store']);
+Route::post('/favorites/toggle', [FavoriteController::class, 'toggle']);
+Route::get('/favorites', [FavoriteController::class, 'index']);
+
 
 // Route::post('register',[ApiController::class,'register']);
 // Route::post('login',[ApiController::class,'Login']);

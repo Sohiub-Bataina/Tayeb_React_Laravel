@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-const BlogCard = ({ blog, blogs, setBlogs }) => {
-    const [liked, setLiked] = useState(false); // حالة لتتبع ما إذا كانت المدونة مفضلة
+const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
+    const [isLiked, setIsLiked] = useState(liked);
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
@@ -33,9 +33,10 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
         }
     }
 
-    const toggleLike = () => {
-        setLiked(!liked); // تحديث حالة الإعجاب عند الضغط
-        toast(liked ? "Removed from favorites." : "Added to favorites.");
+    const handleLike = () => {
+        setIsLiked(!isLiked); // تغيير حالة الإعجاب
+        toggleFavorite(blog.id); // التفاعل مع الـ API لإضافة أو إزالة المفضلة
+        toast(isLiked ? "Removed from favorites." : "Added to favorites.");
     }
 
     return (
@@ -76,8 +77,8 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
                                     </a>
                                 </>
                             )}
-                            <button className='btn' onClick={toggleLike}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" fill={liked ? "red" : "gray"} className="bi bi-heart" viewBox="0 0 16 16">
+                            <button className='btn' onClick={handleLike}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" fill={isLiked ? "red" : "gray"} className="bi bi-heart" viewBox="0 0 16 16">
                                     <path d="M8 15s6-4.35 6-7.5C14 5.01 11.74 3 9 3c-1.74 0-3 1.51-3 1.51S4.74 3 3 3C.26 3 0 5.01 0 7.5 0 10.65 8 15 8 15z" />
                                 </svg>
                             </button>

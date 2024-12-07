@@ -4,30 +4,48 @@ import { Link } from 'react-router-dom'; // لاستعمال رابط
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState([]); // للاحتفاظ بالمدونات المفضلة
     const [keyword, setKeyword] = useState('');
 
+    // جلب المدونات
     const fetchBlogs = async () => {
-        const res = await fetch('http://localhost:8000/api/blogs');
-        const result = await res.json();
-        setBlogs(result.data);
+        try {
+            const res = await fetch('http://localhost:8000/api/blogs');
+            if (!res.ok) throw new Error('Failed to fetch blogs');
+            const result = await res.json();
+            setBlogs(result.data); // تخزين المدونات في الحالة
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        }
     };
 
+    // البحث عن مدونة
     const searchBlogs = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:8000/api/blogs?keyword=' + keyword);
-        const result = await res.json();
-        setBlogs(result.data);
+        try {
+            const res = await fetch('http://localhost:8000/api/blogs?keyword=' + keyword);
+            if (!res.ok) throw new Error('Search failed');
+            const result = await res.json();
+            setBlogs(result.data); // تحديث المدونات بعد البحث
+        } catch (error) {
+            console.error('Error searching blogs:', error);
+        }
     };
 
+    // إعادة ضبط البحث
     const resetSearch = () => {
         fetchBlogs();
         setKeyword('');
     };
 
     // إضافة مدونة إلى قائمة المفضلة
-    const addToFavorites = (blog) => {
-        if (!favorites.some((fav) => fav.id === blog.id)) {
+    const toggleFavorite = async (blog) => {
+        const isFavorite = favorites.some((fav) => fav.id === blog.id);
+        if (isFavorite) {
+            // إذا كانت المدونة موجودة في المفضلة، أزلها
+            setFavorites(favorites.filter((fav) => fav.id !== blog.id));
+        } else {
+            // إذا لم تكن المدونة في المفضلة، أضفها
             setFavorites([...favorites, blog]);
         }
     };
@@ -41,7 +59,7 @@ const Blogs = () => {
             {/* الشريط العلوي */}
             <div className="row mb-4 align-items-center">
                 <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
-                    <form onSubmit={(e) => searchBlogs(e)} className="d-flex">
+                    <form onSubmit={searchBlogs} className="d-flex">
                         <input
                             type="text"
                             value={keyword}
@@ -52,7 +70,7 @@ const Blogs = () => {
                         <button className='btn btn-dark me-2'>Search</button>
                         <button
                             type='button'
-                            onClick={() => resetSearch()}
+                            onClick={resetSearch}
                             className='btn btn-success'
                         >
                             Reset
@@ -81,7 +99,8 @@ const Blogs = () => {
                         <BlogCard
                             blog={blog}
                             key={blog.id}
-                            addToFavorites={addToFavorites}
+                            isFavorite={favorites.some((fav) => fav.id === blog.id)} // تمرير حالة المفضلة
+                            toggleFavorite={toggleFavorite} // تمرير دالة التبديل
                         />
                     ))}
             </div>
