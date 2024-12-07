@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 40px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.858);  /* أسود فاتح مع شفافية */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
