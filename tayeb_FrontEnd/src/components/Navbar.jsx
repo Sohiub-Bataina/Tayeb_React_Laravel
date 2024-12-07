@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./Navbar.css"; // Adjust the path as needed
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import logo from "../assets/images/bg_1.jpg"; // Replace with your logo
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [favorites, setFavorites] = useState([]); // حالة لتخزين المفضلات
   const navigate = useNavigate(); // Hook for programmatic navigation
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -38,14 +38,14 @@ function Navbar() {
     }
   };
 
-  /// Handle logout
+  // Handle logout
   const handleLogout = async () => {
     const token = localStorage.getItem("authToken"); // Get token from localStorage
     if (!token) {
       console.error("No token found for logout.");
       return;
     }
-  
+
     try {
       // Send logout request with Authorization header
       const response = await axios.post("http://localhost:8000/api/logout", null, {
@@ -53,7 +53,7 @@ function Navbar() {
           Authorization: `Bearer ${token}`, // Send the token with the request
         },
       });
-  
+
       // If logout is successful
       localStorage.removeItem("authToken"); // Remove token from local storage
       localStorage.removeItem("userId"); // Remove user ID from local storage
@@ -63,8 +63,6 @@ function Navbar() {
       console.error("Logout failed", error);
     }
   };
-  
-
 
   return (
     <header>
@@ -81,35 +79,37 @@ function Navbar() {
           <ul className={`links ${menuOpen ? "show" : ""}`}>
           <li className="nav-item"><Link to="/">Home</Link></li>
           <li className="nav-item"><Link to="/about">About</Link></li>
-          <li className="nav-item"><Link to="/pages">Pages</Link></li>
+          <li className="nav-item">
+            <Link to="/favorites" state={{ favorites }}>
+              Favorites
+            </Link>
+          </li>
           <li className="nav-item"><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
        
 
-            {/* Conditionally render login/logout buttons */}
-            {isLoggedIn ? (
+          {/* Conditionally render login/logout buttons */}
+          {isLoggedIn ? (
+            <li className="nav-item">
+              <button className="btn" onClick={handleLogout}>Logout</button>
+            </li>
+          ) : (
+            <>
               <li className="nav-item">
-                <button className="btn" onClick={handleLogout}>Logout</button>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
               </li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-      </header>
-    
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </header>
   );
-  
 }
 
 export default Navbar;
