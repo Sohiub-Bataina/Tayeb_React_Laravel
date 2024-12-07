@@ -8,24 +8,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Favorite; // إضافة Favorite model
 
 class BlogController extends Controller
 {
     // This method will return all blogs
-    public function index(Request $request) {        
-        $blogs = Blog::orderBy('created_at', 'DESC');
-
-        if (!empty($request->keyword)) {
-            $blogs = $blogs->where('title', 'like', '%' . $request->keyword . '%');
+    public function index()
+    {
+        try {
+            $blogs = Blog::all(); // تأكد من أن الاستعلام يعمل كما هو متوقع
+            return response()->json(['status' => true, 'data' => $blogs]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
         }
-
-        $blogs = $blogs->get();
-
-        return response()->json([
-            'status' => true,
-            'data' => $blogs
-        ]);
     }
+    
+    
 
     // This method will return a single blog
     public function show($id) {
@@ -39,6 +37,11 @@ class BlogController extends Controller
         }
 
         $blog['date'] = \Carbon\Carbon::parse($blog->created_at)->format('d M, Y');
+        $userId = request()->user_id;  // الحصول على user_id من الـ request
+
+        // التحقق من إذا كان المستخدم قد أضاف المدونة إلى المفضلة
+        $isFavorited = Favorite::where('user_id', $userId)->where('blog_id', $id)->exists();
+        $blog['is_favorited'] = $isFavorited;
 
         return response()->json([
             'status' => true,
@@ -61,7 +64,7 @@ class BlogController extends Controller
             ]);
         }
 
-        $user = User::find($request->create_user_id ?? 1);
+        $user = User::find($request->create_user_id ?? 3);
 
         if (!$user) {
             return response()->json([
