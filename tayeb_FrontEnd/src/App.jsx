@@ -16,6 +16,7 @@ import AuthForm from "./components/AuthForm";
 import Profile from "./components/Profile";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -110,6 +111,9 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/login" element={<AuthForm />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user/:id" element={<UserProfile />} />
         <Route path="/login" element={<AuthForm />} />
       </Routes>
       <ToastContainer />
