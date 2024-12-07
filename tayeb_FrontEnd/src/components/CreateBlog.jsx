@@ -103,6 +103,11 @@ const CreateBlog = () => {
                             className={`form-control ${errors.author && 'is-invalid'}`} 
                             placeholder='Author' />
                         {errors.author && <p className='invalid-feedback'>Author field is required</p>}
+                        <input 
+                            type="hidden" 
+                            { ...register('create_user_id') } 
+                            value={localStorage.getItem("userId")} // Set hidden input value to user ID
+                        />
                     </div>
                     <button className='btn btn-dark'>Create</button>
                 </div>
