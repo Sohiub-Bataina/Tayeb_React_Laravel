@@ -17,8 +17,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import AuthForm from './components/AuthForm';
 import Profile from './components/Profile';
-
-
+import UserProfile from './components/UserProfile';
 
 function App() {
   const [favorites, setFavorites] = useState([]); 
@@ -32,31 +31,28 @@ function App() {
     });
   };
 
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
+
   return (
     <>
-      {/* Navbar */}
       <Navbar />
       <HeroSection />
-     
+
       <Routes>
         <Route path="/" element={<Blogs />} />
         <Route path="/create" element={<CreateBlog />} />
         <Route path="/blog/:id" element={<BlogDetail onToggleFavorite={toggleFavorite} />} />
         <Route path="/blog/edit/:id" element={<EditBlog />} />
         <Route path="/favorites" element={<FavoritesPage favorites={favorites} />} />
-        <Route path='/login' element={ <AuthForm />} />
-        <Route path='/profile' element={ <Profile />} />
+        <Route path="/login" element={<AuthForm />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user/:id" element={<UserProfile />} />
       </Routes>
 
       <ToastContainer />
 
-      
-      {/* Footer */}
       <Footer />
-
-       
-     
-
     </>
   );
 }
