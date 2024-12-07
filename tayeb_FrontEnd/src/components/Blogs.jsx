@@ -83,10 +83,7 @@ const Blogs = () => {
                     </form>
                 </div>
                 <div className="col-lg-6 col-md-4 col-sm-12 d-flex justify-content-end">
-                    <Link to="/favorites" state={{ favorites }} className='btn btn-danger me-2'>
-                        Favorites
-                    </Link>
-                    <a onClick={goToCreate} className='btn btn-dark'>Create</a>
+                <a onClick={goToCreate} className='btn btn-dark'>Create</a>
                 </div>
             </div>
 
