@@ -11,8 +11,13 @@ import EditBlog from './components/EditBlog';
 import FavoritesPage from './components/FavoritesPage';
 
 import HeroSection from './components/HeroSection';
+
+import Footer from './components/Footer'; // استيراد الفوتر
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 import AuthForm from './components/AuthForm';
 import Profile from './components/Profile';
+
 
 
 function App() {
@@ -29,13 +34,9 @@ function App() {
 
   return (
     <>
-      {/* <div className="bg-dark text-center py-2 shadow-lg">
-        <h1 className="text-white">React & Laravel Blog App</h1>
-      </div> */}
-
       {/* Navbar */}
       <Navbar />
-     <HeroSection />
+      <HeroSection />
      
       <Routes>
         <Route path="/" element={<Blogs />} />
@@ -48,8 +49,14 @@ function App() {
       </Routes>
 
       <ToastContainer />
+
+      
+      {/* Footer */}
+      <Footer />
+
        
      
+
     </>
   );
 }
