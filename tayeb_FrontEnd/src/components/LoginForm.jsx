@@ -3,11 +3,22 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './AuthForm.css';
 
+
+
+ 
+
+ 
+
 const LoginForm = ({ onSwitchToSignup }) => {
+  const navigate = useNavigate();
+
+  const goToHome = () => {
+    navigate("/"); // ينقلك إلى صفحة "About"
+  };
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
-  const navigate = useNavigate();
+ 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +69,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
   
 
       setSuccessMessage("Login successful!");
-      navigate("/"); // Redirect to Hero page
+      
     } catch (error) {
       setErrors({ login: "Invalid credentials!" });
     }
@@ -93,7 +104,8 @@ const LoginForm = ({ onSwitchToSignup }) => {
         </div>
         {errors.login && <p className="error">{errors.login}</p>}
         <div className="CTA">
-          <input type="submit" value="Login" />
+          <input type="submit" value="Login" onClick={goToHome}/>
+          
           <a href="#" onClick={onSwitchToSignup} className="switch">
             I'm New
           </a>
