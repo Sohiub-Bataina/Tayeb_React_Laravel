@@ -14,6 +14,7 @@ const CreateBlog = () => {
     function onChange(e) {
         setHtml(e.target.value);
     }
+    
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0]
