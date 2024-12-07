@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BlogCard from './BlogCard';
 import { Link } from 'react-router-dom'; // لاستعمال رابط
+import { useNavigate } from 'react-router-dom';
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
@@ -18,6 +19,10 @@ const Blogs = () => {
             console.error('Error fetching blogs:', error);
         }
     };
+    const navigate = useNavigate();
+    const goToCreate = () => {
+        navigate("/create"); // ينقلك إلى صفحة Blogs
+      };
 
     // البحث عن مدونة
     const searchBlogs = async (e) => {
@@ -81,7 +86,7 @@ const Blogs = () => {
                     <Link to="/favorites" state={{ favorites }} className='btn btn-danger me-2'>
                         Favorites
                     </Link>
-                    <a href='/create' className='btn btn-dark'>Create</a>
+                    <a onClick={goToCreate} className='btn btn-dark'>Create</a>
                 </div>
             </div>
 
