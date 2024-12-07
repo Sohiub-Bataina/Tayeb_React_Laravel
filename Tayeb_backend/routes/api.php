@@ -3,9 +3,11 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TempImageController;
 use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
 
 
 
@@ -29,6 +31,10 @@ Route::put('blogs/{id}',[BlogController::class,'update']);
 Route::delete('blogs/{id}',[BlogController::class,'destroy']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::put('/users/{id}', [UserController::class, 'update']);
+Route::post('/users', [UserController::class, 'store']);
 
 // Route::post('register',[ApiController::class,'register']);
 // Route::post('login',[ApiController::class,'Login']);

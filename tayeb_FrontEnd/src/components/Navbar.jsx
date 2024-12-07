@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css"; // Adjust the path as needed
-import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
+import "./Navbar.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,27 +11,22 @@ function Navbar() {
   return (
     <header>
       <nav className="navbar">
-        {/* Logo */}
         <div className="logo">
           <i className="fas fa-utensils me-2"></i>
-          <h2>Tayeb</h2>  
+          <h2>Tayeb</h2>
         </div>
 
-        {/* Hamburger menu for small screens */}
         <span className="hamburger-btn" onClick={toggleMenu}>
           ☰
         </span>
 
-        {/* Navigation links */}
         <ul className={`links ${menuOpen ? "show" : ""}`}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/pages">Pages</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
         </ul>
-        
-        
-        {/* Login/Registration buttons */}
+
         <div className="action-buttons">
           <button className="btn">Login</button>
           <button className="btn">Register</button>
