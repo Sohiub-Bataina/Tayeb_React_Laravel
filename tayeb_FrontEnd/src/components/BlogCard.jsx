@@ -9,7 +9,30 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
         // Retrieve user ID from local storage
         const storedUserId = localStorage.getItem("userId");
         setUserId(storedUserId);
-    }, []);
+
+        // Check if the blog is in the favorites
+        const checkFavoriteStatus = async () => {
+            const response = await fetch("http://localhost:8000/api/favorites/check", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    blog_id: blog.id,
+                    user_id: storedUserId
+                })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                setIsLiked(result.isFavorite); // Set the initial like state
+            }
+        };
+
+        if (storedUserId) {
+            checkFavoriteStatus();
+        }
+    }, [blog.id]);
 
     const showImage = (img) => {
         return (img) ? 'http://localhost:8000/uploads/blogs/' + img : 'https://placehold.co/600x400';
@@ -33,10 +56,25 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
         }
     }
 
-    const handleLike = () => {
-        setIsLiked(!isLiked); // تغيير حالة الإعجاب
-        toggleFavorite(blog.id); // التفاعل مع الـ API لإضافة أو إزالة المفضلة
-        toast(isLiked ? "Removed from favorites." : "Added to favorites.");
+    const handleLike = async () => {
+        const response = await fetch("http://localhost:8000/api/favorites/toggle", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                blog_id: blog.id,
+                user_id: userId
+            })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            setIsLiked(!isLiked); // Toggle like state
+            toast(result.message); // Show success message
+        } else {
+            toast("Failed to toggle favorite.");
+        }
     }
 
     return (

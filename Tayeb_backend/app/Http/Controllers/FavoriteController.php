@@ -48,4 +48,19 @@ class FavoriteController extends Controller {
 
         return response()->json($favorites);
     }
+
+    // التحقق من حالة المفضلة
+    public function checkFavoriteStatus(Request $request)
+    {
+        $request->validate([
+            'blog_id' => 'required|exists:blogs,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $isFavorite = Favorite::where('user_id', $request->user_id)
+            ->where('blog_id', $request->blog_id)
+            ->exists();
+
+        return response()->json(['isFavorite' => $isFavorite]);
+    }
 }
