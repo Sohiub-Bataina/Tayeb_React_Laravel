@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // استيراد useNavigate
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'; // استيراد مكتبة SweetAlert2
 
 const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
     const [isLiked, setIsLiked] = useState(liked);
@@ -39,9 +40,18 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
             ? 'http://localhost:8000/uploads/blogs/' + img
             : 'https://placehold.co/600x400';
     };
-
-    const deleteBlog = async (id) => {
-        if (confirm("Are you sure you want to delete?")) {
+  const deleteBlog = async (id) => {
+    // عرض نافذة SweetAlert
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
             const res = await fetch("http://localhost:8000/api/blogs/" + id, {
                 method: 'DELETE'
             });
@@ -51,12 +61,14 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
                 setBlogs(newBlogs);
 
                 toast("Blog deleted successfully.");
-                window.location.reload(); // Reload the page after deletion
+                // window.location.reload(); // Reload the page after deletion
             } else {
                 toast("Failed to delete blog.");
             }
         }
-    };
+    });
+};
+
 
     const handleLike = async () => {
         const response = await fetch("http://localhost:8000/api/favorites/toggle", {
