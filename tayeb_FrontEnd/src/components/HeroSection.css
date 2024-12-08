@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     height: 90%;
+    
 }
 
 .hero-section:after {
@@ -81,3 +82,6 @@
         font-size: 14px;
     }
 }
+
+
+
