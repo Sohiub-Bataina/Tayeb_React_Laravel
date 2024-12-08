@@ -26,12 +26,18 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
 
             const result = await response.json();
             if (response.ok) {
-                setIsLiked(result.isFavorite); // Set the initial like state
+                setIsLiked(result.isFavorite); // تعيين حالة الإعجاب من الـ API
             }
         };
 
         if (storedUserId) {
             checkFavoriteStatus();
+        }
+
+        // استرجاع حالة الإعجاب من localStorage إذا كانت موجودة
+        const storedLikeStatus = localStorage.getItem(`isLiked_${blog.id}`);
+        if (storedLikeStatus !== null) {
+            setIsLiked(JSON.parse(storedLikeStatus)); // تعيين الحالة من localStorage
         }
     }, [blog.id]);
 
@@ -40,35 +46,34 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
             ? 'http://localhost:8000/uploads/blogs/' + img
             : 'https://placehold.co/600x400';
     };
-  const deleteBlog = async (id) => {
-    // عرض نافذة SweetAlert
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            const res = await fetch("http://localhost:8000/api/blogs/" + id, {
-                method: 'DELETE'
-            });
 
-            if (res.ok) {
-                const newBlogs = blogs.filter((blog) => blog.id !== id);
-                setBlogs(newBlogs);
+    const deleteBlog = async (id) => {
+        // عرض نافذة SweetAlert
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await fetch("http://localhost:8000/api/blogs/" + id, {
+                    method: 'DELETE'
+                });
 
-                toast("Blog deleted successfully.");
-                // window.location.reload(); // Reload the page after deletion
-            } else {
-                toast("Failed to delete blog.");
+                if (res.ok) {
+                    const newBlogs = blogs.filter((blog) => blog.id !== id);
+                    setBlogs(newBlogs);
+
+                    toast("Blog deleted successfully.");
+                } else {
+                    toast("Failed to delete blog.");
+                }
             }
-        }
-    });
-};
-
+        });
+    };
 
     const handleLike = async () => {
         const response = await fetch("http://localhost:8000/api/favorites/toggle", {
@@ -84,8 +89,13 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
 
         const result = await response.json();
         if (response.ok) {
-            setIsLiked(!isLiked); // Toggle like state
-            toast(result.message); // Show success message
+            // تغيير الحالة المحلية
+            setIsLiked(!isLiked);
+
+            // حفظ الحالة في localStorage
+            localStorage.setItem(`isLiked_${blog.id}`, !isLiked);
+
+            toast(result.message); // عرض رسالة النجاح
         } else {
             toast("Failed to toggle favorite.");
         }
@@ -160,7 +170,7 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="20"
                                     height="28"
-                                    fill={isLiked ? "red" : "gray"}
+                                    fill={isLiked ? "gray" : "red"} // هذا التغيير هنا: مملوء عندما لا يكون مفضل، فارغ عندما يكون مفضل
                                     className="bi bi-heart"
                                     viewBox="0 0 16 16"
                                 >
