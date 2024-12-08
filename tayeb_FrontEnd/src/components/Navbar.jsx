@@ -40,17 +40,18 @@ function Navbar() {
 
   // Handle logout
   const handleLogout = async () => {
-    const token = localStorage.getItem("authToken"); // Get token from localStorage
+    const token = localStorage.getItem("authToken"); // الحصول على التوكن
     if (!token) {
       console.error("No token found for logout.");
+      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن هناك توكن
       return;
     }
 
     try {
-      // Send logout request with Authorization header
-      const response = await axios.post("http://localhost:8000/api/logout", null, {
+      // إرسال طلب للخروج إذا كان لديك API خاص بالخروج
+      await axios.post("http://localhost:8000/api/logout", null, {
         headers: {
-          Authorization: `Bearer ${token}`, // Send the token with the request
+          Authorization: `Bearer ${token}`, // إرسال التوكن مع الطلب
         },
       });
 
@@ -60,7 +61,13 @@ function Navbar() {
       setIsLoggedIn(false); // Update login state
       navigate("/"); // Redirect to home page after logout
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Logout failed on server:", error);
+    } finally {
+      // في كل الحالات، قم بحذف التوكن وإعادة التوجيه
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId");
+      setIsLoggedIn(false);
+      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول
     }
   };
 

@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './AuthForm.css';
 
-
-
- 
-
- 
-
 const LoginForm = ({ onSwitchToSignup }) => {
   const navigate = useNavigate();
 
-  const goToHome = () => {
-    navigate("/"); // ينقلك إلى صفحة "About"
-  };
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
- 
+
+  // استخدام useEffect للتحقق من حالة تسجيل الدخول
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+      navigate("/"); // إذا كان الرمز موجودًا، انتقل إلى الصفحة الرئيسية
+    }
+  }, [navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,19 +55,17 @@ const LoginForm = ({ onSwitchToSignup }) => {
         email,
         password,
       });
-      console.log("Full response:", response);
 
-      const { token, user } = response.data; // Extract token and user from response
-      const { id } = user; // Extract id from user object
-  
+      const { token, user } = response.data;
+      const { id } = user;
+
       // Store token and user ID in local storage
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
-    console.log("User ID saved in localStorage:", id);
-  
+
 
       setSuccessMessage("Login successful!");
-      
+      navigate("/"); // الانتقال إلى الصفحة الرئيسية بعد تسجيل الدخول
     } catch (error) {
       setErrors({ login: "Invalid credentials!" });
     }
@@ -104,8 +100,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
         </div>
         {errors.login && <p className="error">{errors.login}</p>}
         <div className="CTA">
-          <input type="submit" value="Login" onClick={goToHome}/>
-          
+          <input type="submit" value="Login" />
           <a href="#" onClick={onSwitchToSignup} className="switch">
             I'm New
           </a>
