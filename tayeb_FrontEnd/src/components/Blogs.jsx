@@ -86,7 +86,7 @@ const Blogs = () => {
                     <Link to="/favorites" state={{ favorites }} className='btn btn-danger me-2'>
                         Favorites
                     </Link>
-                    <a onClick={goToCreate} className='btn btn-dark'>Create</a>
+                    <a href='' onClick={goToCreate}className='btn btn-dark'>Create</a>
                 </div>
             </div>
 

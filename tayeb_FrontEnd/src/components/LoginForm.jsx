@@ -4,76 +4,64 @@ import { useNavigate } from "react-router-dom";
 import './AuthForm.css';
 
 
-
- 
-
- 
-
 const LoginForm = ({ onSwitchToSignup }) => {
-  const navigate = useNavigate();
-
-  const goToHome = () => {
-    navigate("/"); // ينقلك إلى صفحة "About"
-  };
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
- 
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
-
+  
     // Initialize an empty errors object
     const newErrors = {};
-
+  
     // Validate email
     if (!email) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Please type a valid email address.";
     }
-
+  
     // Validate password
     if (!password) {
       newErrors.password = "Password is required.";
     } else if (password.length < 8) {
       newErrors.password = "Password must be at least 8 characters.";
     }
-
+  
     // If there are any validation errors, update the errors state and stop submission
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
     try {
       const response = await axios.post("http://localhost:8000/api/login", {
         email,
         password,
       });
-      console.log("Full response:", response);
-
-      const { token, user } = response.data; // Extract token and user from response
-      const { id } = user; // Extract id from user object
+  
+      const token = response.data.token;
+    //   const userId = response.data.users.id; // Adjust based on your API response
   
       // Store token and user ID in local storage
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", id);
-      console.log("User ID saved in localStorage:", id);
-  
-
+    //   localStorage.setItem("userId", userId);
       setSuccessMessage("Login successful!");
-      
+      navigate("/"); // Redirect to Hero page
     } catch (error) {
       setErrors({ login: "Invalid credentials!" });
     }
   };
+  
 
   return (
     <div className="login form-piece">
@@ -104,8 +92,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
         </div>
         {errors.login && <p className="error">{errors.login}</p>}
         <div className="CTA">
-          <input type="submit" value="Login" onClick={goToHome}/>
-          
+          <input type="submit" value="Login" />
           <a href="#" onClick={onSwitchToSignup} className="switch">
             I'm New
           </a>

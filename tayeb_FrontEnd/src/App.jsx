@@ -33,6 +33,14 @@ function App() {
       console.error("Error fetching favorites:", error);
     }
   };
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      navigate("/login"); // إعادة التوجيه إذا لم يكن المستخدم مسجلًا دخوله
+    } else {
+      fetchFavorites(); // جلب البيانات عند تسجيل الدخول
+    }
+  }, []);
 
   const toggleFavorite = async (blog) => {
     try {
