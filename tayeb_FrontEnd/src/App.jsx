@@ -19,7 +19,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserProfile from "./components/UserProfile";
 import Footer from "./components/Footer";
 import About from "./components/about/About";
-import RecipeList from "./components/RecipeList";
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -119,7 +118,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<AuthForm />} />
         <Route path="/user/:id" element={<UserProfile />} />
-        <Route path="/recipes" element={<RecipeList />} />
       </Routes>
       <Footer /> {/* إضافة الفوتر هنا */}
       <ToastContainer />

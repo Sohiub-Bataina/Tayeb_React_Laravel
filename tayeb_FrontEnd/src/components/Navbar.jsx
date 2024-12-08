@@ -38,6 +38,7 @@ function Navbar() {
     }
   };
 
+  // Handle logout
   const handleLogout = async () => {
     const token = localStorage.getItem("authToken"); // الحصول على التوكن
     if (!token) {
@@ -45,7 +46,7 @@ function Navbar() {
       navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن هناك توكن
       return;
     }
-  
+
     try {
       // إرسال طلب للخروج إذا كان لديك API خاص بالخروج
       await axios.post("http://localhost:8000/api/logout", null, {
@@ -53,6 +54,12 @@ function Navbar() {
           Authorization: `Bearer ${token}`, // إرسال التوكن مع الطلب
         },
       });
+
+      // If logout is successful
+      localStorage.removeItem("authToken"); // Remove token from local storage
+      localStorage.removeItem("userId"); // Remove user ID from local storage
+      setIsLoggedIn(false); // Update login state
+      navigate("/"); // Redirect to home page after logout
     } catch (error) {
       console.error("Logout failed on server:", error);
     } finally {
