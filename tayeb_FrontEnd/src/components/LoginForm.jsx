@@ -65,7 +65,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
       // Store token and user ID in local storage
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
-      console.log("User ID saved in localStorage:", id);
+    console.log("User ID saved in localStorage:", id);
   
 
       setSuccessMessage("Login successful!");
