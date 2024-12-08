@@ -16,6 +16,10 @@ import AuthForm from "./components/AuthForm";
 import Profile from "./components/Profile";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import UserProfile from "./components/UserProfile";
+import Footer from "./components/Footer";
+import About from "./components/about/About";
+import RecipeList from "./components/RecipeList";
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -33,14 +37,6 @@ function App() {
       console.error("Error fetching favorites:", error);
     }
   };
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      navigate("/login"); // إعادة التوجيه إذا لم يكن المستخدم مسجلًا دخوله
-    } else {
-      fetchFavorites(); // جلب البيانات عند تسجيل الدخول
-    }
-  }, []);
 
   const toggleFavorite = async (blog) => {
     try {
@@ -70,8 +66,10 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HeroSection />
-              <Blogs />
+              <>
+                <HeroSection />
+                <Blogs />
+              </>
             </PrivateRoute>
           }
         />
@@ -118,8 +116,12 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/about" element={<About />} />
         <Route path="/login" element={<AuthForm />} />
+        <Route path="/user/:id" element={<UserProfile />} />
+        <Route path="/recipes" element={<RecipeList />} />
       </Routes>
+      <Footer /> {/* إضافة الفوتر هنا */}
       <ToastContainer />
     </AuthProvider>
   );

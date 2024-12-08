@@ -6,29 +6,38 @@ const AuthForm = () => {
   const [formType, setFormType] = useState("login");
 
   const toggleFormType = () => {
-    setFormType((prev) => (prev === "login" ? "signup" : "login"));
+    setFormType((prevFormType) => (prevFormType === "login" ? "signup" : "login"));
   };
 
   return (
     <div className="container">
       <section id="formHolder">
-        <div className="row">
-          <div className="col-sm-6 brand">
-            <a href="https://icom-digital.com/" className="logo">
-              ICOM
-            </a>
+        <div className="row align-items-center">
+          {/* Brand Section */}
+          <div className="col-md-6 brand text-center">
+          
             <div className="heading">
-              <h2>Brand</h2>
+              <h2>Tayeb</h2>
               <p>Your Right Choice</p>
             </div>
           </div>
-        
-          <div className="col-sm-6 form">
+
+          {/* Form Section */}
+          <div className="col-md-6 form">
             {formType === "login" ? (
               <LoginForm onSwitchToSignup={toggleFormType} />
             ) : (
               <SignupForm onSwitchToLogin={toggleFormType} />
             )}
+            <div className="text-center mt-3">
+              <button 
+                className="btn btn-link" 
+                onClick={toggleFormType}
+                style={{ textDecoration: "none" }}
+              >
+               
+              </button>
+            </div>
           </div>
         </div>
       </section>

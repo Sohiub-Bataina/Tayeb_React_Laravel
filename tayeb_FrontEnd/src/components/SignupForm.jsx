@@ -31,7 +31,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post("http://localhost:8000/api/signup", {
+        const response = await axios.post("http://127.0.0.1:8000/api/signup", {
           name: formData.name,
           email: formData.email,
           password: formData.password,

@@ -1,0 +1,102 @@
+/* تنسيق الحاوية الرئيسية */
+.user-profile-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+/* تنسيق العنصر الأساسي */
+.profile-card {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* تنسيق جزء معلومات البروفايل */
+.profile-info {
+  flex: 1;
+  padding-right: 20px;
+  border-right: 2px solid #ddd;
+  text-align: center;
+}
+
+/* تنسيق الصورة */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid #4e73df;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* تنسيق الحقول النصية */
+.profile-form div {
+  margin-bottom: 20px;
+}
+
+.profile-form label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.profile-form input,
+.profile-form select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+/* تنسيق الأزرار */
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-button {
+  background-color: #4e73df;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cancel-button {
+  background-color: #ddd;
+  color: black;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* تنسيق جزء المدونات */
+.blog-section {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.blog-section h3 {
+  margin-top: 10px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}

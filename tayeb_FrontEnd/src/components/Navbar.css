@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 40px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.858);  /* أسود فاتح مع شفافية */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
@@ -219,3 +219,44 @@ main .btn:hover {
 .hero-content {
   text-align: center;
 }
+/* Navigation list items */
+.nav-item {
+  list-style: none;
+  display: flex;
+  align-items: center; /* Vertically align content */
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Shared styles for <a> and <button> */
+.nav-item a,
+.nav-item button {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  background: none; /* Ensure buttons match links' background */
+  border: none; /* Remove default button styling */
+  padding: 10px 20px; /* Consistent padding */
+  height: 40px; /* Consistent height */
+  line-height: 20px; /* Align text vertically */
+  display: flex;
+  align-items: center; /* Center text inside element */
+  justify-content: center; /* Center text inside element */
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect */
+.nav-item a:hover,
+.nav-item button:hover {
+  color: #fbb03b;
+}
+
+/* Align all <li> elements horizontally */
+.links {
+  display: flex;
+  gap: 30px; /* Space between list items */
+  justify-content: center; /* Center links in navbar */
+  align-items: center; /* Align links vertically */
+}
+

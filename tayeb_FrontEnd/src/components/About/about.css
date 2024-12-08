@@ -1,0 +1,249 @@
+/* خلفية قسم Featured */
+.feature-bg {
+    background-color: #f7f7f7;
+    padding: 80px 0;
+}
+
+.featured-text h2 {
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+}
+
+.orange-text {
+    color: #ff7f32;
+}
+
+.list-box {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.list-box:hover {
+    transform: translateY(-10px);
+}
+
+.list-icon {
+    font-size: 30px;
+    color: #ff7f32;
+    margin-right: 15px;
+}
+
+.list-box h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.list-box p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* خلفية قسم Our Team */
+.mt-150 {
+    margin-top: 150px;
+    background-color: #ffffff;
+    padding: 80px 0;
+}
+
+.section-title h3 {
+    font-size: 36px;
+    color: #333;
+    font-weight: bold;
+}
+
+.single-team-item {
+    text-align: center;
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.single-team-item:hover {
+    transform: translateY(-10px);
+}
+
+.team-bg {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    transition: transform 0.3s;
+}
+
+
+
+.single-team-item h4 {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.single-team-item span {
+    font-size: 16px;
+    color: #666;
+}
+
+.social-link-team {
+    list-style: none;
+    padding: 0;
+}
+
+.social-link-team li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-link-team a {
+    color: #ff7f32;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.social-link-team a:hover {
+    color: #333;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .featured-text h2 {
+        font-size: 28px;
+    }
+
+    .list-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-icon {
+        margin-bottom: 10px;
+    }
+
+    .team-bg {
+        width: 150px;
+        height: 150px;
+    }
+
+    .single-team-item h4 {
+        font-size: 18px;
+    }
+}
+
+/* breadcrumb.css */
+.breadcrumb-section {
+    margin-top: 20px;
+}
+
+.breadcrumb-text p {
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.breadcrumb-text h1 {
+    color: #000;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* تحسين التنسيق لصورة الفريق */
+.team-img {
+    width: 150px; /* تحديد العرض */
+    height: 130px; /* تحديد الطول */
+    border-radius: 50%; /* لجعل الصورة دائرية */
+    object-fit: cover; /* لتغطية الصورة بدون تشويه */
+}
+
+/* Grid for Team Section */
+.team-container {
+    display: flex;
+    flex-wrap: wrap; /* لجعل العناصر تتنقل إلى السطر التالي عندما تكون الشاشة صغيرة */
+    justify-content: center; /* لتوسيط العناصر */
+    gap: 20px; /* المسافة بين العناصر */
+}
+
+.single-team-item {
+    flex: 1 1 30%; /* العرض الافتراضي 30% من المساحة المتاحة */
+    max-width: 300px; /* الحد الأقصى لعرض العنصر */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .single-team-item {
+        flex: 1 1 45%; /* لجعل كل عنصر يشغل 45% من العرض */
+    }
+}
+
+@media (max-width: 480px) {
+    .single-team-item {
+        flex: 1 1 100%; /* لجعل كل عنصر يشغل 100% من العرض على الشاشات الصغيرة جدًا */
+    }
+}
+
+
+
+.section-title {
+    margin-bottom: 80px;
+  }
+  
+  .breadcrumb-bg {
+    background-image: url(../../../public/images/about.png); /* تأكد من تحديث المسار إذا لزم الأمر */
+  }
+  
+  .breadcrumb-text p {
+    color: #F28123;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+  }
+  
+  .breadcrumb-text h1 {
+    font-size: 50px;
+    font-weight: 900;
+    color: #fff;
+    margin: 0;
+    margin-top: 20px;
+  }
+  
+  .breadcrumb-section {
+    padding: 150px 0;
+    margin-top: 0;  /* يمكن تغيير هذه القيمة لزيادة أو تقليل المسافة */
+
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    z-index: 1;
+    background-attachment: fixed;
+    padding-top: 200px;
+  }
+  
+  .breadcrumb-section:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color: #07212e;
+    z-index: -1;
+    opacity: 0.8;
+  }

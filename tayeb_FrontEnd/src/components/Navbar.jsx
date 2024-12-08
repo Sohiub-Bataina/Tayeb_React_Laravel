@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./Navbar.css"; // Adjust the path as needed
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import logo from "../assets/images/bg_1.jpg"; // Replace with your logo
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [favorites, setFavorites] = useState([]); // حالة لتخزين المفضلات
   const navigate = useNavigate(); // Hook for programmatic navigation
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -38,33 +38,31 @@ function Navbar() {
     }
   };
 
-  /// Handle logout
   const handleLogout = async () => {
-    const token = localStorage.getItem("authToken"); // Get token from localStorage
+    const token = localStorage.getItem("authToken"); // الحصول على التوكن
     if (!token) {
       console.error("No token found for logout.");
+      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن هناك توكن
       return;
     }
   
     try {
-      // Send logout request with Authorization header
-      const response = await axios.post("http://localhost:8000/api/logout", null, {
+      // إرسال طلب للخروج إذا كان لديك API خاص بالخروج
+      await axios.post("http://localhost:8000/api/logout", null, {
         headers: {
-          Authorization: `Bearer ${token}`, // Send the token with the request
+          Authorization: `Bearer ${token}`, // إرسال التوكن مع الطلب
         },
       });
-  
-      // If logout is successful
-      localStorage.removeItem("authToken"); // Remove token from local storage
-      localStorage.removeItem("userId"); // Remove user ID from local storage
-      setIsLoggedIn(false); // Update login state
-      navigate("/"); // Redirect to home page after logout
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Logout failed on server:", error);
+    } finally {
+      // في كل الحالات، قم بحذف التوكن وإعادة التوجيه
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId");
+      setIsLoggedIn(false);
+      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول
     }
   };
-  
-
 
   return (
     <header>
@@ -79,37 +77,39 @@ function Navbar() {
             ☰
           </span>
           <ul className={`links ${menuOpen ? "show" : ""}`}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/pages">Pages</Link></li>
-          <li><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
+          <li className="nav-item"><Link to="/">Home</Link></li>
+          <li className="nav-item"><Link to="/about">About</Link></li>
+          <li className="nav-item">
+            <Link to="/favorites" state={{ favorites }}>
+              Favorites
+            </Link>
+          </li>
+          <li className="nav-item"><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
        
 
-            {/* Conditionally render login/logout buttons */}
-            {isLoggedIn ? (
+          {/* Conditionally render login/logout buttons */}
+          {isLoggedIn ? (
+            <li className="nav-item">
+              <button className="btn" onClick={handleLogout}>Logout</button>
+            </li>
+          ) : (
+            <>
               <li className="nav-item">
-                <button className="btn" onClick={handleLogout}>Logout</button>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
               </li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-      </header>
-    
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </header>
   );
-  
 }
 
 export default Navbar;
