@@ -1,57 +1,57 @@
-
 .hero-section {
     padding: 150px 0;
     margin-top: 0;
-    background-image: url(../../public/images/feature-bg.jpg); /* تأكد من تحديث المسار إذا لزم الأمر */
+    background-image: url(../../public/images/image.png);
     background-size: cover;
     background-position: center center;
     position: relative;
     z-index: 1;
     background-attachment: fixed;
-    padding-top: 200px;  /* Adjust padding to fit your design */
-    justify-content: center; /* التوسيط أفقيًا */
-    align-items: center; /* التوسيط عموديًا */
+    padding-top: 200px;
+    justify-content: center;
+    align-items: center;
     height: 90%;
+}
 
-  }
-
-  .hero-section:after {
+.hero-section:after {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     content: "";
-    background-color: rgba(7, 33, 46, 0.8);  /* Same color overlay as breadcrumb */
+    background-color: rgba(7, 33, 46, 0.8);
     z-index: -1;
-  }
+}
 
-  .hero-text {
+.hero-text {
     text-align: center;
     color: #fff;
     position: relative;
     z-index: 1;
-  }
+}
 
-  .heroP {
+.heroP {
     color: #F28123;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 7px;
-  }
+    font-size: 20px;
+}
 
-  .heroH {
-    color: #fff;
+.heroH {
     font-size: 50px;
     font-weight: 900;
-    margin: 20px 0;
-  }
+    color: #fff;
+    margin: 0;
+    margin-top: 20px;
+}
 
-  .btn-container {
+.btn-container {
     margin-top: 30px;
-  }
+}
 
-   .btn1 {
+.btn1 {
     background-color: #000000;
     color: #fff;
     border: none;
@@ -62,24 +62,22 @@
     cursor: pointer;
     margin: auto;
     text-align: center;
-
     border: #000000 solid 1px;
     transition: background-color 0.3s ease;
-  } 
+}
 
-  .btn1:hover {
+.btn1:hover {
     background-color: #d97e1c;
-    border:#fff solid 1px;
+    border: #fff solid 1px;
     color: black;
-  } 
+}
 
-  /* Optional: Styling for responsiveness */
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
     .heroH {
-      font-size: 35px;
+        font-size: 35px;
     }
     .btn1 {
-      padding: 10px 25px;
-      font-size: 14px;
+        padding: 10px 25px;
+        font-size: 14px;
     }
-  }
+}

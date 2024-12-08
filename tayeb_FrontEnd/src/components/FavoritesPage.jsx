@@ -52,21 +52,32 @@ const FavoritesPage = () => {
     };
 
     return (
-        <div>
-            <h2>Your Favorites</h2>
+        <div className="container">
+          <h2 
+    className="text-center my-4" 
+    style={{ 
+        color: 'black', 
+        textDecoration: 'underline',   // إضافة خط تحت النص
+        textDecorationColor: 'orange', // تحديد لون الخط ليكون برتقالي
+        textDecorationThickness: '3px', // تحديد سمك الخط تحت النص
+    }} 
+>
+    Your Favorites
+</h2>
+
             {error && <p style={{ color: 'red' }}>{error}</p>} {/* عرض الأخطاء إن وجدت */}
-            <div className="row">
+            <div className="row px-3">
                 {favorites.length > 0 ? (
                     favorites.map((favorite) => (
                         <BlogCard
                             key={favorite.blog.id}
                             blog={favorite.blog}
-                            toggleFavorite={toggleFavorite} // تمرير الدالة للتفاعل مع القلب
+                            toggleFavorite={toggleFavorite}
                             liked={true} // المدونة تكون مفضلة بالفعل عند عرضها هنا
                         />
                     ))
                 ) : (
-                    <p>No favorites found</p> // في حال عدم وجود مفضلات
+                    <p>No favorites found</p>
                 )}
             </div>
         </div>
@@ -74,11 +85,3 @@ const FavoritesPage = () => {
 };
 
 export default FavoritesPage;
-
-
-
-
-
-
-
-
