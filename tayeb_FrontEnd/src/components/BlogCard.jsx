@@ -166,17 +166,18 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
                                 </>
                             )}
                             <button className='btn' onClick={handleLike}>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="28"
-                                    fill={isLiked ? "gray" : "red"} // هذا التغيير هنا: مملوء عندما لا يكون مفضل، فارغ عندما يكون مفضل
-                                    className="bi bi-heart"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M8 15s6-4.35 6-7.5C14 5.01 11.74 3 9 3c-1.74 0-3 1.51-3 1.51S4.74 3 3 3C.26 3 0 5.01 0 7.5 0 10.65 8 15 8 15z" />
-                                </svg>
-                            </button>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="28"
+        fill={isLiked ? "red" : "gray"} // Heart is filled red when liked
+        className="bi bi-heart"
+        viewBox="0 0 16 16"
+    >
+        <path d="M8 15s6-4.35 6-7.5C14 5.01 11.74 3 9 3c-1.74 0-3 1.51-3 1.51S4.74 3 3 3C.26 3 0 5.01 0 7.5 0 10.65 8 15 8 15z" />
+    </svg>
+</button>
+
                         </div>
                     </div>
                 </div>
