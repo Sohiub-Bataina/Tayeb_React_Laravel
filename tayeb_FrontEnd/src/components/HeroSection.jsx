@@ -8,7 +8,6 @@ function HeroSection() {
         <p className="heroP">Delicious recipes. Simple cooking. Pure joy.</p>
         <h1 className="heroH"> Simple cooking</h1>
         <div className="btn-container">
-          <button className="btn1">blogs</button>
         </div>
       </div>
     </main>
