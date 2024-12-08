@@ -1,10 +1,11 @@
+/* Breadcrumb Section */
 .breadcrumb-section {
     background-color: #f7f7f7;
     padding: 50px 0;
 }
 
 .breadcrumb-bg {
-    background: url('your-background-image.jpg') no-repeat center center;
+    background: url('../../public/images/about.png') no-repeat center center;
     background-size: cover;
 }
 
@@ -61,7 +62,7 @@
     display: block;
 }
 
-/* تحسين النصوص */
+/* لتحسين النصوص */
 .single-article-text {
     font-size: 16px; /* حجم النص الافتراضي */
     line-height: 1.8; /* زيادة المسافة بين الأسطر */

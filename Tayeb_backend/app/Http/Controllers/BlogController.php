@@ -13,16 +13,31 @@ use App\Models\Favorite; // إضافة Favorite model
 class BlogController extends Controller
 {
     // This method will return all blogs
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $blogs = Blog::all(); // تأكد من أن الاستعلام يعمل كما هو متوقع
+            // الحصول على الكلمة المفتاحية من الطلب
+            $keyword = $request->get('keyword');
+    
+            // استعلام المدونات
+            $blogs = Blog::query();
+    
+            // إذا وُجدت كلمة مفتاحية، يتم إضافة شروط البحث
+            if ($keyword) {
+                $blogs->where('title', 'LIKE', "%{$keyword}%") // البحث في العنوان
+                      ->orWhere('shortDesc', 'LIKE', "%{$keyword}%") // البحث في الوصف القصير
+                      ->orWhere('description', 'LIKE', "%{$keyword}%"); // البحث في الوصف الكامل
+            }
+    
+            // جلب النتائج
+            $blogs = $blogs->get();
+    
             return response()->json(['status' => true, 'data' => $blogs]);
         } catch (\Exception $e) {
             return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
         }
     }
-    
+        
     
 
     // This method will return a single blog

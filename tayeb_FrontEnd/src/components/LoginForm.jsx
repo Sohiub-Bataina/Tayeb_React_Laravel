@@ -63,6 +63,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
 
+
       setSuccessMessage("Login successful!");
       navigate("/"); // الانتقال إلى الصفحة الرئيسية بعد تسجيل الدخول
     } catch (error) {
