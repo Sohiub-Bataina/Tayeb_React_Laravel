@@ -96,12 +96,12 @@ const FeaturedSection = () => {
       <div className="col-lg-4 col-md-6">
         <div className="single-team-item">
           <div className="team-bg team-bg-1"></div>
-          <img src="/images/Mays Al-khalil2.jpg" alt="Mays Alkhalil" className="team-img" />
+          <img src="https://img.freepik.com/premium-photo/cute-playful-3d-girl-chef-character-with-expressive-eyes-wearing-chefs-hat-apron_1305436-369.jpg?ga=GA1.1.1643396337.1727782725&semt=ais_hybrid" alt="Mays Alkhalil" className="team-img" />
           <h4>Mays Alkhalil</h4>
           <ul className="social-link-team">
-            <li><a href="https://github.com/your-username" target="_blank"><i className="fab fa-github"></i></a></li>
+            <li><a href="https://github.com/mays-alkhalil" target="_blank"><i className="fab fa-github"></i></a></li>
             <li><a href="mailto:your-email@example.com" target="_blank"><i className="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/your-username" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+            <li><a href="www.linkedin.com/in/maysalkhalil" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
           </ul>
         </div>
       </div>
@@ -109,12 +109,12 @@ const FeaturedSection = () => {
       <div className="col-lg-4 col-md-6">
         <div className="single-team-item">
           <div className="team-bg team-bg-2"></div>
-          <img src="/images/Mays Al-khalil2.jpg" alt="Mays Alkhalil" className="team-img" />
+          <img src="https://img.freepik.com/premium-photo/cute-playful-3d-girl-chef-character-with-expressive-eyes-wearing-chefs-hat-apron_1305436-369.jpg?ga=GA1.1.1643396337.1727782725&semt=ais_hybrid" alt="Mays Alkhalil" className="team-img" />
           <h4>Razan Alhroub</h4>
           <ul className="social-link-team">
-            <li><a href="https://github.com/your-username" target="_blank"><i className="fab fa-github"></i></a></li>
+            <li><a href="https://github.com/Razanhroub" target="_blank"><i className="fab fa-github"></i></a></li>
             <li><a href="mailto:your-email@example.com" target="_blank"><i className="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/your-username" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/razan-alhroub-67857a2a7/" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
           </ul>
         </div>
       </div>
@@ -122,12 +122,12 @@ const FeaturedSection = () => {
       <div className="col-lg-4 col-md-6">
         <div className="single-team-item">
           <div className="team-bg team-bg-3"></div>
-          <img src="/images/Mays Al-khalil2.jpg" alt="Mays Alkhalil" className="team-img" />
+          <img src="https://img.freepik.com/premium-photo/cute-playful-3d-girl-chef-character-with-expressive-eyes-wearing-chefs-hat-apron_1305436-369.jpg?ga=GA1.1.1643396337.1727782725&semt=ais_hybrid" alt="Mays Alkhalil" className="team-img" />
           <h4>Dina Nafez</h4>
           <ul className="social-link-team">
-            <li><a href="https://github.com/your-username" target="_blank"><i className="fab fa-github"></i></a></li>
+            <li><a href="https://github.com/Dinanafez" target="_blank"><i className="fab fa-github"></i></a></li>
             <li><a href="mailto:your-email@example.com" target="_blank"><i className="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/your-username" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/dina-nafez-al-akhras-b477b1246/" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
           </ul>
         </div>
       </div>
@@ -138,12 +138,12 @@ const FeaturedSection = () => {
       <div className="col-lg-4 col-md-6">
         <div className="single-team-item">
           <div className="team-bg team-bg-3"></div>
-          <img src="/images/Mays Al-khalil2.jpg" alt="Mays Alkhalil" className="team-img" />
+          <img src="https://img.freepik.com/free-vector/coloured-chefdesign_1152-72.jpg?t=st=1733502343~exp=1733505943~hmac=ac1fc38f99cace96bc9315068d08c3672e9704dc63745d1b67a878d0b4ca1646&w=826" alt="Mays Alkhalil" className="team-img" />
           <h4>Ahmad Azzam</h4>
           <ul className="social-link-team">
-            <li><a href="https://github.com/your-username" target="_blank"><i className="fab fa-github"></i></a></li>
+            <li><a href="https://github.com/ahmad-alshamma" target="_blank"><i className="fab fa-github"></i></a></li>
             <li><a href="mailto:your-email@example.com" target="_blank"><i className="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/your-username" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://www.linkedin.com/feed/" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
           </ul>
         </div>
       </div>
@@ -151,12 +151,12 @@ const FeaturedSection = () => {
       <div className="col-lg-4 col-md-6">
         <div className="single-team-item">
           <div className="team-bg team-bg-3"></div>
-          <img src="/images/Mays Al-khalil2.jpg" alt="Mays Alkhalil" className="team-img" />
+          <img src="https://img.freepik.com/free-vector/coloured-chefdesign_1152-72.jpg?t=st=1733502343~exp=1733505943~hmac=ac1fc38f99cace96bc9315068d08c3672e9704dc63745d1b67a878d0b4ca1646&w=826" alt="Mays Alkhalil" className="team-img" />
           <h4>Sohiub Batainah</h4>
           <ul className="social-link-team">
-            <li><a href="https://github.com/your-username" target="_blank"><i className="fab fa-github"></i></a></li>
+            <li><a href="https://github.com/Sohiub-Bataina" target="_blank"><i className="fab fa-github"></i></a></li>
             <li><a href="mailto:your-email@example.com" target="_blank"><i className="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/your-username" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/sohiub-bataineh" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
           </ul>
         </div>
       </div>
