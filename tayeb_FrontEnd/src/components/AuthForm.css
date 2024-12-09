@@ -1,14 +1,18 @@
 body {
   font-family: "Montserrat", sans-serif;
-/*   
-  background: url(../assets/images/bg_4.jpg);
+  
+  /* background:black; */
   background-size: cover;
-  background-position: center center; */
+  background-position: center center;
+  margin: 0; /* إزالة المسافات بين عناصر الصفحة */
+  padding: 0; /* إزالة الهوامش الداخلية */
 }
 .auth-container {
   background-color: lightgray;
   padding: 20px;
   border: 1px solid black;
+  /* margin:0px !important;
+  padding: 0px !important; */
 }
 
 .auth-container h1 {
@@ -20,9 +24,7 @@ body {
   font-size: 14px; /* Adjust font size for readability */
   margin-top: 5px;
 }
-.container {
-  max-width: 900px;
-}
+
 
 a {
   display: inline-block;
@@ -42,17 +44,10 @@ h1 {
 
 section#formHolder {
   padding: 50px 0;
+  
 }
 
 
-  .brand {
-    position: relative;
-    background: url(https://images.pexels.com/photos/1109197/pexels-photo-1109197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed; /* تأكد من أن الصورة ثابتة عند التمرير */
-    color: #eee;
-    min-height: 540px;
-  }
   
 
 .brand .heading h2 {
@@ -80,6 +75,7 @@ background: url(https://images.pexels.com/photos/1109197/pexels-photo-1109197.jp
 background-size: cover;
 color: #eee;
 min-height: 540px;
+width: 100%;
 }
 
 .brand::before {
@@ -89,7 +85,7 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+background: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
 z-index: 1;
 }
 
@@ -188,6 +184,14 @@ text-align: center;
 
 .form {
   position: relative;
+  width: 100%; /* تأكد من عرض الفورم متناسق */
+  max-width: 500px; /* تحديد عرض أقصى للفورم */
+  background: #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  height: 80vh;
+  margin-left: 400px;
+
 }
 .form .form-peice {
   background: #fff;
@@ -214,7 +218,7 @@ text-align: center;
   width: 70%;
   position: absolute;
   top: 50%;
-  left: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 .form form .form-group {
@@ -367,13 +371,14 @@ font-style: italic;
 }
 
 @media (max-width: 768px) {
-  .container {
-    overflow: hidden;
-  }
-
+  
   section#formHolder {
-    padding: 0;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* اجعل القسم يغطي الشاشة بالكامل */
+    padding: 0; /* إزالة أي padding إضافي قد يسبب تحريك العناصر */
+    margin: 0; /* إزالة أي مسافات إضافية */  }
   section#formHolder div.brand {
     min-height: 200px !important;
   }
@@ -425,3 +430,7 @@ font-style: italic;
     font-size: 50px !important;
   }
 } 
+
+
+
+
