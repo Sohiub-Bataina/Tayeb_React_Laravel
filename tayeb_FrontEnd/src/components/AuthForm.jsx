@@ -11,6 +11,8 @@ const AuthForm = () => {
   };
 
   return (
+
+
     <div className="">
                   <HeroLogin />
 
