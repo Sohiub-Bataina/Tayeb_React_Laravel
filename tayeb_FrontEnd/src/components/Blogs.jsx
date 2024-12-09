@@ -22,7 +22,7 @@ const Blogs = () => {
     const navigate = useNavigate();
     const goToCreate = () => {
         navigate("/create"); // ينقلك إلى صفحة Blogs
-      };
+    };
 
     // البحث عن مدونة
     const searchBlogs = async (e) => {
@@ -63,7 +63,7 @@ const Blogs = () => {
         <div className='container pt-5'>
             {/* الشريط العلوي */}
             <div className="row mb-4 align-items-center">
-            <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
+                <div className="col-lg-6 col-md-8 col-sm-12 mb-3">
                     <form onSubmit={searchBlogs} className="d-flex">
                         <input
                             type="text"
@@ -74,19 +74,20 @@ const Blogs = () => {
                         />
                         <button className='btn btn-dark me-2'>Search</button>
                         <button
-                            type='button'
+                            type="button"
                             onClick={resetSearch}
-                            className='btn btn-success'
+                            style={{ backgroundColor: "#ee9750", color: "#fff", border: "none", important: true }}
+                            className="btn"
                         >
                             Reset
                         </button>
                     </form>
                 </div>
                 <div className="col-lg-6 col-md-4 col-sm-12 d-flex justify-content-end">
-                    <Link to="/favorites" state={{ favorites }} className='btn btn-danger me-2'>
+                    {/* <Link to="/favorites" state={{ favorites }} className='btn btn-danger me-2'>
                         Favorites
-                    </Link>
-                    <a href='' onClick={goToCreate}className='btn btn-dark'>Create</a>
+                    </Link> */}
+
                     <a onClick={goToCreate} className='btn btn-dark'>Create</a>
                 </div>
             </div>

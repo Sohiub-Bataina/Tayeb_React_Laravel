@@ -106,7 +106,9 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
             <div
                 className='card border-0 shadow-lg h-100'
                 style={{
-                    transition: "transform 0.3s ease, box-shadow 0.3s ease"
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    marginBottom: "20px" // المسافة السفلية
+
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.05)";
