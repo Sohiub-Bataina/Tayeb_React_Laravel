@@ -9,7 +9,7 @@ function HeroSection() {
   };
 
   return (
-    <main className="hero-section">
+    <main className="hero-section" style={{ marginTop: '20px' }}>
       <div className="hero-text">
         <p className="heroP">Delicious recipes. Simple cooking. Pure joy.</p>
         <h1 className="heroH">Simple cooking</h1>

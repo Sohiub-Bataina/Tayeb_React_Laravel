@@ -105,7 +105,7 @@ const EditBlog = () => {
 
     return (
         <div className='container mb-5'>
-            <div className="d-flex justify-content-between pt-5 mb-4">
+            <div style={{ marginTop: '20px' }} className="d-flex justify-content-between pt-5 mb-4">
                 <h4>Edit Blog</h4>
                 <a href='/' className='btn btn-dark'>Back</a>
             </div>
