@@ -1,9 +1,9 @@
 body {
   font-family: "Montserrat", sans-serif;
-/*   
-  background: url(../assets/images/bg_4.jpg);
+  
+  background:black;
   background-size: cover;
-  background-position: center center; */
+  background-position: center center;
 }
 .auth-container {
   background-color: lightgray;

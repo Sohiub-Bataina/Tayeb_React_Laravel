@@ -1,119 +1,114 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
-import "./Navbar.css"; // Adjust the path as needed
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import "./Navbar.css";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-  const [favorites, setFavorites] = useState([]); // حالة لتخزين المفضلات
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const [menuOpen, setMenuOpen] = useState(false); // حالة لتتبع ما إذا كانت القائمة مفتوحة أم لا
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false); // دالة لإغلاق القائمة
 
-  // Check if the user is logged in when the component mounts
-  useEffect(() => {
-    const token = localStorage.getItem("authToken"); // Change token name to 'authToken'
-    if (token) {
-      setIsLoggedIn(true); // If token exists, user is logged in
-    }
-  }, []);
-
-  // Handle login (for storing token and user ID)
-  const handleLogin = async (email, password) => {
-    try {
-      const response = await axios.post("http://localhost/api/login", { email, password });
-      const { token, user } = response.data; // Extract token and user from response
-      const { id } = user; // Extract id from user object
-
-      // Store token and user ID in local storage
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", id);
-
-      setIsLoggedIn(true); // Update login state
-      navigate("/"); // Redirect to home page after login
-    } catch (error) {
-      console.error("Login failed", error);
-    }
+  // دالة لجلب بيانات المستخدم
+  const getUserData = () => {
+    const userName = localStorage.getItem("userName");
+    const userGender = localStorage.getItem("userGender");
+    const userAvatar =
+      userGender === "male"
+        ? 'https://img.freepik.com/free-vector/coloured-chefdesign_1152-72.jpg?t=st=1733502343~exp=1733505943~hmac=ac1fc38f99cace96bc9315068d08c3672e9704dc63745d1b67a878d0b4ca1646&w=826'
+        :'https://img.freepik.com/premium-photo/cute-playful-3d-girl-chef-character-with-expressive-eyes-wearing-chefs-hat-apron_1305436-369.jpg?ga=GA1.1.1643396337.1727782725&semt=ais_hybrid';;
+    return { userName, userGender, userAvatar };
   };
 
-  // Handle logout
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, [setIsLoggedIn]); // تأكد من أن حالة الدخول تتحدث بشكل صحيح
+
+  const { userName, userAvatar } = getUserData();
+
   const handleLogout = async () => {
-    const token = localStorage.getItem("authToken"); // الحصول على التوكن
-    if (!token) {
-      console.error("No token found for logout.");
-      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن هناك توكن
-      return;
-    }
-
-    try {
-      // إرسال طلب للخروج إذا كان لديك API خاص بالخروج
-      await axios.post("http://localhost:8000/api/logout", null, {
-        headers: {
-          Authorization: `Bearer ${token}`, // إرسال التوكن مع الطلب
-        },
-      });
-
-      // If logout is successful
-      localStorage.removeItem("authToken"); // Remove token from local storage
-      localStorage.removeItem("userId"); // Remove user ID from local storage
-      setIsLoggedIn(false); // Update login state
-      navigate("/"); // Redirect to home page after logout
-    } catch (error) {
-      console.error("Logout failed on server:", error);
-    } finally {
-      // في كل الحالات، قم بحذف التوكن وإعادة التوجيه
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userId");
-      setIsLoggedIn(false);
-      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول
-    }
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    closeMenu(); // إغلاق القائمة بعد تسجيل الخروج
+    navigate("/login");
   };
 
   return (
     <header>
       <nav className="navbar">
-        <div className="logo">
-          <i className="fas fa-utensils me-2"></i>
-          <h2>Tayeb</h2>
+        <div className="logo" style={{ color: "orange" ,fontFamily: "Arial, sans-serif" }}>
+
+          <Link to="/" ><i className="fas fa-utensils me-2" style={{ color: "orange" }}>&nbsp;Tayeb</i></Link>
         </div>
-
-          {/* Navigation links in the middle */}
-          <span className="hamburger-btn" onClick={toggleMenu}>
-            ☰
-          </span>
-          <ul className={`links ${menuOpen ? "show" : ""}`}>
-          <li className="nav-item"><Link to="/">Home</Link></li>
-          <li className="nav-item"><Link to="/about">About</Link></li>
-          <li className="nav-item">
-            <Link to="/favorites" state={{ favorites }}>
-              Favorites
-            </Link>
-          </li>
-          <li className="nav-item"><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
-       
-
-          {/* Conditionally render login/logout buttons */}
+        <button
+          className="hamburger-btn"
+          onClick={toggleMenu}
+          aria-expanded={menuOpen}
+        >
+          ☰
+        </button>
+        <div style={{ color: "orange" }} >
+        <ul className={`links ${menuOpen ? "show" : ""}`}>
+         
+          
           {isLoggedIn ? (
-            <li className="nav-item">
-              <button className="btn" onClick={handleLogout}>Logout</button>
-            </li>
-          ) : (
             <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
+            <li>
+                <Link to="/" onClick={closeMenu}>
+                  HOME
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                  Register
+            
+              <li>
+                <Link to="/about" onClick={closeMenu}>
+                  About
                 </Link>
               </li>
+              <li>
+                <Link to="/favorites" onClick={closeMenu}>
+                  Favorites
+                </Link>
+              </li>
+              
+              <li className="nav-item" >
+                {/* صورة المستخدم مع القائمة المنسدلة */}
+                <div
+                  className="avatar-container"
+                  onClick={toggleMenu} // التبديل بين إظهار وإخفاء المينيو
+                >
+                  <img
+                    src={userAvatar}
+                    alt="User Avatar"
+                    style={{ borderRadius: "50%", width: "40px", height: "40px" ,border:'1px solid blue'}}
+                  />
+                    {userName}
+                </div>
+                {menuOpen && (
+                  <div className="dropdown-menu">
+                    <Link to={`/user/${localStorage.getItem("userId")}`} onClick={closeMenu}>
+                    Profile
+                    </Link>
+                    <button onClick={handleLogout}>Logout</button>
+                  </div>
+                )}
+              </li>
+              
             </>
+          ) : (
+            <li>
+              <Link to="/login" onClick={closeMenu}>
+                Login
+              </Link>
+            </li>
           )}
         </ul>
+        </div>
       </nav>
     </header>
   );

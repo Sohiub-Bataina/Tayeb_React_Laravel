@@ -1,206 +1,104 @@
-/* Reset for consistent appearance across browsers */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Poppins', sans-serif;
-    /* background-color: #333; */
-    color: #fff;
-    /* background-image: url("src/assets/images/bg_1.jpg"); */
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    position: relative;
-  }
-  
-  /* Header styling */
-  header {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-  }
-  
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 40px;
-    background-color: rgba(0, 0, 0, 0.858);  /* أسود فاتح مع شفافية */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  padding-top: 60px; /* Adjust for fixed navbar */
+}
+
+/* Header Styling */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  height: 0px; /* Reduced height */
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px; /* Reduced padding */
+  background-color: rgba(0, 0, 0, 0.858); /* Dark background with transparency */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 60px; /* Reduced height */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .logo i {
-    font-size: 28px; /* Adjust the size of the icon to match the font size */
-    margin-right: 10px; /* Space between the icon and text */
-    color: #fbb03b; /* Match the color with the text */
+  font-size: 28px;
+  margin-right: 10px;
+  color: #fbb03b;
 }
 
 .logo h2 {
-    font-size: 28px; /* Ensure the font size matches the icon size */
-    font-weight: bold;
-    color: #fbb03b;
-    margin: 0; /* Remove any default margin */
-}
-  
-  /* Centered navigation links */
-  .links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    flex-grow: 1;
-    justify-content: center; /* Center links */
-  }
-  
-  .links li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .links li a:hover {
-    color: #fbb03b;
-  }
-  
-  /* Login and Registration Buttons */
-  .action-buttons {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .action-buttons .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #fbb03b;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .action-buttons .btn:hover {
-    background-color: #333;
-    color: #fbb03b;
-  }
-  
-  /* Responsive adjustments */
-  .hamburger-btn {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: #fff;
-  }
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-  }
-  
-  main h1 {
-    font-size: 50px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    line-height: 1.2;
-    color: #000000;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.945), 
-                 -2px -2px 5px rgba(255, 255, 255, 0.3); /* ظل مزدوج لجعل النص بارزًا */
+  font-size: 24px; /* Slightly smaller font size */
+  font-weight: bold;
+  color: #fbb03b;
+  margin: 0;
 }
 
-main p {
-  font-size: 18px;
-  margin-bottom: 30px;
-  color: #000000;
-  text-shadow: 1px 1px 3px rgb(0, 0, 0);
-}
-
-main .btn-container {
+/* Navigation Links */
+.links {
   display: flex;
-  gap: 20px;
+  list-style: none;
+  gap: 30px;
+  flex-grow: 1;
+  justify-content: center;
 }
 
-main .btn {
-  padding: 12px 30px;
-  font-size: 18px;
-  border: 2px solid black;
+.links li a {
+  text-decoration: none;
   color: #fff;
-  background-color: black;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.links li a:hover {
+  color: #fbb03b;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.action-buttons .btn {
+  padding: 8px 18px; /* Adjusted padding */
+  font-size: 14px; /* Smaller font size */
+  color: #fff;
+  background-color: #fbb03b;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-main .btn:hover {
-  background-color: #fbb03b;
-  color: #333;
+.action-buttons .btn:hover {
+  background-color: #333;
+  color: #fbb03b;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .links {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: calc(100vh - 60px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .links.show {
-    display: flex;
-  }
-
-  .hamburger-btn {
-    display: block;
-  }
+/* Hamburger Button for Mobile */
+.hamburger-btn {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #fff;
 }
 
-@media (max-width: 768px) {
-  .links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    width: 100%;
-    height: calc(100vh - 70px);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .links.show {
-    display: flex;
-  }
-
-  .hamburger-btn {
-    display: block;
-  }
-
-  .action-buttons {
-    display: none;
-  }
-}
-
+/* Hero Section */
 .hero-section {
   background-image: url("../assets/images/bg_1.jpg");
   background-size: cover;
@@ -219,44 +117,53 @@ main .btn:hover {
 .hero-content {
   text-align: center;
 }
-/* Navigation list items */
-.nav-item {
-  list-style: none;
-  display: flex;
-  align-items: center; /* Vertically align content */
-  justify-content: center; /* Center content horizontally */
-}
 
-/* Shared styles for <a> and <button> */
-.nav-item a,
-.nav-item button {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  background: none; /* Ensure buttons match links' background */
-  border: none; /* Remove default button styling */
-  padding: 10px 20px; /* Consistent padding */
-  height: 40px; /* Consistent height */
-  line-height: 20px; /* Align text vertically */
-  display: flex;
-  align-items: center; /* Center text inside element */
-  justify-content: center; /* Center text inside element */
-  cursor: pointer;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    position: fixed; /* Keep navbar fixed on top */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
 
-/* Hover effect */
-.nav-item a:hover,
-.nav-item button:hover {
-  color: #fbb03b;
-}
+  .logo h2 {
+    font-size: 1.2rem;
+  }
 
-/* Align all <li> elements horizontally */
-.links {
-  display: flex;
-  gap: 30px; /* Space between list items */
-  justify-content: center; /* Center links in navbar */
-  align-items: center; /* Align links vertically */
-}
+  .links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: calc(100vh - 60px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
+  .links.show {
+    display: flex;
+  }
+
+  .links .nav-item {
+    margin: 10px 0;
+  }
+
+  .links .nav-item a,
+  .links .nav-item button {
+    text-align: center;
+    width: 100%;
+  }
+
+  .hamburger-btn {
+    display: block;
+  }
+
+  .action-buttons {
+    display: none; /* Hide action buttons on mobile */
+  }
+}

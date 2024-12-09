@@ -10,7 +10,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <section id="formHolder">
         <div className="row align-items-center">
           {/* Brand Section */}
