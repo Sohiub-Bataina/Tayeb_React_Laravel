@@ -102,7 +102,10 @@ const UserProfile = () => {
           borderRadius: '10px',
           boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
           padding: '20px',
-          marginBottom: '20px',
+          // marginBottom: '20px',
+          marginTop:'50px',
+          marginBottom: '50px',
+
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -237,4 +240,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
