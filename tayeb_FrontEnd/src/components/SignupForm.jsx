@@ -55,7 +55,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
   return (
     <div className="signup form-piece">
       {successMessage && <p className="success">{successMessage}</p>}
-      <form onSubmit={handleSignupSubmit}>
+      <form onChange={handleSignupSubmit}>
         <h3>Sign Up!</h3>
         <div className="form-group">
           <input
@@ -111,7 +111,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
             name="confirmPassword"
             placeholder="Confirm Password"
             value={formData.confirmPassword}
-            onChange={handleInputChange}
+            onKeyChange={handleInputChange}
             required
           />
           {errors.confirmPassword && (

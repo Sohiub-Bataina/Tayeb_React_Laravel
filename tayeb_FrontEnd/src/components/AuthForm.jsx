@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import HeroLogin from "./HeroLogin";
 
 const AuthForm = () => {
   const [formType, setFormType] = useState("login");
@@ -10,17 +11,12 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="">
+                  <HeroLogin />
+
       <section id="formHolder">
         <div className="row align-items-center">
-          {/* Brand Section */}
-          <div className="col-md-6 brand text-center">
-          
-            <div className="heading">
-              <h2>Tayeb</h2>
-              <p>Your Right Choice</p>
-            </div>
-          </div>
+         
 
           {/* Form Section */}
           <div className="col-md-6 form">

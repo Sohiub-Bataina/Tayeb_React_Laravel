@@ -13,79 +13,44 @@
     color: #fff;
 }
 
+/* Article Section */
+/* Article Section */
 .single-article-section {
     margin-top: 50px;
     margin-bottom: 50px;
+    display: flex; /* ترتيب النص والصورة بجانب بعض */
+    gap: 20px; /* مسافة بين النص والصورة */
+    justify-content: center;
+    align-items: flex-start;
 }
 
+/* النصوص */
 .single-article-text {
+    flex: 1; /* النص يأخذ نفس حيز الصورة */
+    height: auto; /* يتم ضبط الطول لاحقًا بناءً على طول الصورة */
+    max-height: 100%; /* النص لا يتجاوز طول الصورة */
+    overflow-y: auto; /* تمرير عمودي فقط */
+    padding: 20px;
     background-color: #fff;
-    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.6; /* مسافة مناسبة بين الأسطر */
+    color: #333;
+    word-wrap: break-word; /* ضمان أن الكلمات الطويلة تنزل للأسطر التالية */
 }
 
-.blog-meta {
-    font-size: 14px;
-    color: #888;
+/* الصورة */
+.article-image {
+    width: 400px; /* عرض ثابت للصورة */
+    height: 400px; /* الطول يتناسب مع العرض */
+    border-radius: 8px;
+    margin: 0px 13px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.comments-list-wrap {
-    margin-top: 40px;
-}
-
-.comment-template input,
-.comment-template textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.logo-carousel-section {
-    background-color: #f0f0f0;
-    padding: 60px 0;
-}
-
-.logo-carousel-inner {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.single-logo-item {
-    width: 18%;
-    margin: 0 1%;
-}
-
-.single-logo-item img {
-    max-width: 100%;
-    display: block;
-}
-
-/* لتحسين النصوص */
-.single-article-text {
-    font-size: 16px; /* حجم النص الافتراضي */
-    line-height: 1.8; /* زيادة المسافة بين الأسطر */
-    color: #333; /* لون النص */
-}
-
-.single-article-text h2 {
-    font-size: 24px; /* تكبير العناوين */
-    font-weight: bold; /* جعل العنوان أكثر وضوحاً */
-    color: #222; /* لون مميز */
-}
-
-.single-article-text p {
-    font-size: 18px; /* حجم الخط للوصف */
-    font-weight: normal; /* وزن النص للوصف */
-    color: #444; /* لون النصوص العامة */
-}
-
-.single-article-text .blog-meta {
-    font-size: 14px; /* حجم نص البيانات الإضافية */
-    color: #777; /* لون النصوص الإضافية */
-}
-
-.h44 {
-    color: #000;
+/* ضمان توافق طول النص مع الصورة */
+.single-article-section .single-article-text {
+    height: 400px; /* جعل النص تلقائي الارتفاع */
+    max-height: 400px; /* ضبط الطول بما يناسب طول الصورة */
 }

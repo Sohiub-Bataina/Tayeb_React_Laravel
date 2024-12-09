@@ -60,6 +60,7 @@ const Blogs = () => {
     }, []);
 
     return (
+        
         <div className='container pt-5'>
             {/* الشريط العلوي */}
             <div className="row mb-4 align-items-center">

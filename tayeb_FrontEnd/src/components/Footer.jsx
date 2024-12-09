@@ -65,61 +65,54 @@
 
 import React from 'react';
 import './Footer.css';  // تأكد من مسار الملف بشكل صحيح
+import { Link } from 'react-router-dom';
+
 
 function Footer() {
   return (
     <>
       {/* Footer Area */}
       <div className="footer-area">
-        <div className="container">
-          <div className="row">
-            {/* About Us Section */}
-            <div className="col-lg-3 col-md-6">
-              <div className="footer-box about-widget">
-                <h2 className="widget-title">About Us</h2>
-                <p>We share delicious recipes, cooking tips, and food reviews to inspire your culinary journey. Join us for the best food content!</p>
-              </div>
-            </div>
-
-            {/* Get in Touch Section */}
-            <div className="col-lg-3 col-md-6">
-              <div className="footer-box get-in-touch">
-                <h2 className="widget-title">Get in Touch</h2>
-                <ul>
-                  <li>123 Food St., Amman City</li>
-                  <li>Tayeb@foodblog.com</li>
-                  <li>+00 123 456 7890</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Pages Section */}
-            <div className="col-lg-3 col-md-6">
-              <div className="footer-box pages">
-                <h2 className="widget-title">Quick Links</h2>
-                <ul>
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/about">About Us</a></li>
-                  <li><a href="/create">Create Blog</a></li>
-                  <li><a href="/favorites">Favorites</a></li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Subscribe Section */}
-            <div className="col-lg-3 col-md-6">
-              <div className="footer-box subscribe">
-                <h2 className="widget-title">Subscribe</h2>
-                <p>Stay updated with the latest recipes and food posts. Subscribe to our newsletter!</p>
-                <form action="/">
-                  <input type="email" placeholder="Email" />
-                  <button type="submit"><i className="fas fa-paper-plane"></i></button>
-                </form>
-              </div>
-            </div>
-          </div>
+  <div className="container">
+    <div className="row">
+      {/* About Us Section */}
+      <div className="col-lg-4 col-md-6 mb-4">
+        <div className="footer-box about-widget">
+          <h2 className="widget-title">About Us</h2>
+          <p>We share delicious recipes, cooking tips, and food reviews to inspire your culinary journey. Join us for the best food content!</p>
         </div>
       </div>
+
+      {/* Get in Touch Section */}
+      <div className="col-lg-4 col-md-6 mb-4">
+        <div className="footer-box get-in-touch">
+          <h2 className="widget-title">Get in Touch</h2>
+          <ul>
+            <li>123 Food St., Amman City</li>
+            <li>Tayeb@foodblog.com</li>
+            <li>+00 123 456 7890</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Pages Section */}
+      <div className="col-lg-4 col-md-6 mb-4">
+        <div className="footer-box pages">
+          <h2 className="widget-title">Quick Links</h2>
+          <ul>
+  <li><Link to="/">Home</Link></li>
+  <li><Link to="/about">About Us</Link></li>
+  <li><Link to="/create">Create Blog</Link></li>
+  <li><Link to="/favorites">Favorites</Link></li>
+</ul>
+        </div>
+      </div>
+
+      {/* Subscribe Section */}
+    </div>
+  </div> 
+</div>
+
       {/* End Footer Area */}
 
       {/* Copyright Section */}

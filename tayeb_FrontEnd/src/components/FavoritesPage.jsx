@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BlogCard from './BlogCard'; // استيراد مكون BlogCard
 import { useNavigate } from 'react-router-dom'; // لإعادة التوجيه عند الحاجة
+import HeroFavorite from "./HeroFavorite";
 
 const FavoritesPage = () => {
     const navigate = useNavigate(); // لإعادة التوجيه
@@ -52,21 +53,14 @@ const FavoritesPage = () => {
     };
 
     return (
-        <div className="container">
-          <h2 
-    className="text-center my-4" 
-    style={{ 
-        color: 'black', 
-        textDecoration: 'underline',   // إضافة خط تحت النص
-        textDecorationColor: 'orange', // تحديد لون الخط ليكون برتقالي
-        textDecorationThickness: '3px', // تحديد سمك الخط تحت النص
-    }} 
->
-    Your Favorites
-</h2>
+        <div className="container-fluid" style={{ padding: 0, margin: 0, width: '100%' }}>
+            {/* إضافة قسم Hero Favorite */}
+            <HeroFavorite />
 
-            {error && <p style={{ color: 'red' }}>{error}</p>} {/* عرض الأخطاء إن وجدت */}
-            <div className="row px-3">
+            {/* إضافة هامش بين الهيرو والكروت */}
+            <div className="row px-3 mt-5" style={{ padding: 0, margin: 0 }}>
+                {error && <p style={{ color: 'red' }}>{error}</p>} {/* عرض الأخطاء إن وجدت */}
+
                 {favorites.length > 0 ? (
                     favorites.map((favorite) => (
                         <BlogCard
