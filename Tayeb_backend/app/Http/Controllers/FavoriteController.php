@@ -63,4 +63,6 @@ class FavoriteController extends Controller {
 
         return response()->json(['isFavorite' => $isFavorite]);
     }
+
+    
 }
