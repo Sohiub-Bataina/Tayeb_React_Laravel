@@ -12,27 +12,27 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
         const storedUserId = localStorage.getItem("userId");
         setUserId(storedUserId);
 
-        const checkFavoriteStatus = async () => {
-            const response = await fetch("http://localhost:8000/api/favorites/check", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    blog_id: blog.id,
-                    user_id: storedUserId
-                })
-            });
+        // const checkFavoriteStatus = async () => {
+        //     const response = await fetch("http://localhost:8000/api/favorites/check", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             blog_id: blog.id,
+        //             user_id: storedUserId
+        //         })
+        //     });
 
-            const result = await response.json();
-            if (response.ok) {
-                setIsLiked(result.isFavorite); // تعيين حالة الإعجاب من الـ API
-            }
-        };
+        //     const result = await response.json();
+        //     if (response.ok) {
+        //         setIsLiked(result.isFavorite); // تعيين حالة الإعجاب من الـ API
+        //     }
+        // };
 
-        if (storedUserId) {
-            checkFavoriteStatus();
-        }
+        // if (storedUserId) {
+        //     checkFavoriteStatus();
+        // }
 
         // استرجاع حالة الإعجاب من localStorage إذا كانت موجودة
         const storedLikeStatus = localStorage.getItem(`isLiked_${blog.id}`);
@@ -47,34 +47,84 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
             : 'https://placehold.co/600x400';
     };
 
-    const deleteBlog = async (id) => {
-        // عرض نافذة SweetAlert
+    // const deleteBlog = async (blogId) => {
+    //     Swal.fire({
+    //         title: 'Are you sure?',
+    //         text: "You won't be able to revert this!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#d33',
+    //         cancelButtonColor: '#3085d6',
+    //         confirmButtonText: 'Yes, delete it!'
+    //     }).then(async (result) => {
+    //         if (result.isConfirmed) {
+    //             try {
+    //                 const res = await fetch(`http://localhost:8000/api/blogs/${blogId}`, {
+    //                     method: 'DELETE',
+    //                     headers: {
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 });
+    
+    //                 const result = await res.json();
+    //                 console.log("Delete response:", result);
+    
+    //                 if (res.ok) {
+    //                     const newBlogs = blogs.filter((blog) => blog.id !== blogId);
+    //                     setBlogs(newBlogs);
+    //                     toast("Blog deleted successfully.");
+    //                 } else {
+    //                     console.error("Failed to delete blog:", result);
+    //                     toast("Failed to delete blog: " + result.message);
+    //                 }
+    //             } catch (error) {
+    //                 console.error("Error deleting blog:", error);
+    //                 toast("Blog deleted successfully.");
+    //             }
+    //         }
+    //     });
+    // };
+    const deleteBlog = async (blogId) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#d33' ,
-            cancelButtonColor:'#3085d6',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch("http://localhost:8000/api/blogs/" + id, {
-                    method: 'DELETE'
-                });
-
-                if (res.ok) {
-                    const newBlogs = blogs.filter((blog) => blog.id !== id);
-                    setBlogs(newBlogs);
-
-                    toast("Blog deleted successfully.");
-                } else {
-                    toast("Failed to delete blog.");
+                try {
+                    const res = await fetch(`http://localhost:8000/api/blogs/${blogId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+    
+                    const result = await res.json();
+                    console.log("Delete response:", result);
+    
+                    if (res.ok) {
+                        const newBlogs = blogs.filter((blog) => blog.id !== blogId);
+                        setBlogs(newBlogs);
+                        toast("Blog deleted successfully.");
+                    } else {
+                        console.error("Failed to delete blog:", result);
+                        toast("Failed to delete blog: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error deleting blog:", error);
+                    toast("Failed to delete blog due to an unexpected error.");
+                } finally {
+                    // Reload the page regardless of success or failure
+                    window.location.reload();
                 }
             }
         });
     };
-
+    
     const handleLike = async () => {
         const response = await fetch("http://localhost:8000/api/favorites/toggle", {
             method: "POST",

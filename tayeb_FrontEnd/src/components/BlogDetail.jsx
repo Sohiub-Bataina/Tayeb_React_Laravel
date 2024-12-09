@@ -34,32 +34,65 @@ const BlogDetail = () => {
 
       {/* Single Article Section */}
       <div className="single-article-section">
-        {/* النصوص */}
-        <div className="single-article-text">
-          <div className="blog-meta">
-            <span>
-              <i className="fas fa-user"></i> {blog.author}
-            </span>
-            <br />
-            <span>
-              <i className="fas fa-calendar"></i> {blog.date}
-            </span>
-          </div>
-          <h2>{blog.title}</h2>
-          <div
-            dangerouslySetInnerHTML={{ __html: blog.description }}
-          />
-        </div>
+  <div className="single-article-text">
+    {(() => {
+      try {
+        // Check if description exists and process it
+        const processedDescription =
+          blog.description
+            ? blog.description
+                // Split when a character (letters) precedes a dot
+                .split(/(?<=[a-zA-Z])\./)
+                .filter(sentence => sentence.trim() !== '') // Remove empty sentences
+                .map(sentence => sentence.trim() + '.<br/>') // Add a line break after each sentence
+                .join('') // Combine all sentences back into a single string
+            : 'No description available.';
 
-        {/* الصورة */}
-        {blog.image && (
-          <img
-            className="article-image"
-            src={`http://localhost:8000/uploads/blogs/${blog.image}`}
-            alt="blog"
-          />
-        )}
-      </div>
+        // Split description into sentences and wrap each sentence in a <div> with margin
+        const sentencesWithMargin = processedDescription
+          .split('<br/>')
+          .map(sentence => `<div style="margin-bottom: 4px">${sentence}</div>`)
+          .join('<br/>');
+
+        return (
+          <>
+            <div className="blog-meta" style={{ marginTop: '10px' }}>
+              <span>
+                <i className="fas fa-user"></i> {blog.author}
+              </span>
+              <br />
+              <span style={{ marginTop: '10px', display: 'inline-block' }}>
+                <i className="fas fa-calendar"></i> {blog.date}
+              </span>
+            </div>
+            <h2 style={{ marginTop: '10px' }}>{blog.title}</h2>
+            <div
+              style={{ marginTop: '10px' }}
+              dangerouslySetInnerHTML={{
+                __html: sentencesWithMargin,
+              }}
+            />
+          </>
+        );
+      } catch (error) {
+        console.error('Error processing description:', error);
+        return <p>Error loading description.</p>;
+      }
+    })()}
+  </div>
+
+  {/* Image */}
+  {blog.image && (
+    <img
+      className="article-image"
+      src={`http://localhost:8000/uploads/blogs/${blog.image}`}
+      alt="blog"
+      style={{ marginTop: '10px' }}
+    />
+  )}
+</div>
+
+
     </div>
   );
 };
