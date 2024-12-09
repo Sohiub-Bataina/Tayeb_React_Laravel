@@ -27,7 +27,6 @@ const SignupForm = ({ onSwitchToLogin }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -38,22 +37,21 @@ const SignupForm = ({ onSwitchToLogin }) => {
           password: formData.password,
           gender: formData.gender,
         });
-  
-        // Save user details in localStorage
-        localStorage.setItem("userName", response.data.name); // Assuming API returns 'name'
-        localStorage.setItem("userGender", response.data.gender); // Assuming API returns 'gender'
-        console.log(response.data);
         setSuccessMessage("Signup successful! You can now log in.");
-        
-        // Clear form data
-        setFormData({ name: "", email: "", password: "", confirmPassword: "", gender: "" });
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          gender: "",
+        });
         setErrors({});
       } catch (error) {
         setErrors({ api: "Signup failed! Please try again." });
       }
     }
   };
-  
+
   return (
     <div className="signup form-piece">
       {successMessage && <p className="success">{successMessage}</p>}

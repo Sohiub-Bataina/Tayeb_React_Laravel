@@ -27,20 +27,20 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       try {
         setLoading(true);
-    
+
         const userResponse = await axios.get(`http://localhost:8000/api/users/${userId}`, {
           headers: {
-            Authorization: `Bearer YOUR_ACCESS_TOKEN`, // Add token if required
+            Authorization: `Bearer YOUR_ACCESS_TOKEN`, // ضع التوكن إذا كان مطلوبًا
           },
         });
         setUser(userResponse.data);
-    
-        const blogsResponse = await axios.get(`http://localhost:8000/api/user-blogs?user_id=${userId}`, {
+
+        const blogsResponse = await axios.get(`http://localhost:8000/api/blogs?user_id=${userId}`, {
           headers: {
-            Authorization: `Bearer YOUR_ACCESS_TOKEN`, // Add token if required
+            Authorization: `Bearer YOUR_ACCESS_TOKEN`, // ضع التوكن إذا كان مطلوبًا
           },
         });
-        setUserBlogs(blogsResponse.data.data); // No need to filter here
+        setUserBlogs(blogsResponse.data.data.filter((blog) => blog.create_user_id === parseInt(userId)));
       } catch (err) {
         setError('Failed to fetch user data or blogs');
         console.error(err);
@@ -48,7 +48,6 @@ const UserProfile = () => {
         setLoading(false);
       }
     };
-    
 
     fetchUserData();
   }, [userId]);
