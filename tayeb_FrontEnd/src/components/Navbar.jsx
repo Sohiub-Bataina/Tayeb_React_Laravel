@@ -1,74 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Navbar.css"; // Adjust the path as needed
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "./Navbar.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-  const [favorites, setFavorites] = useState([]); // حالة لتخزين المفضلات
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const [menuOpen, setMenuOpen] = useState(false); // حالة القائمة
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false); // دالة لإغلاق القائمة
 
-  // Check if the user is logged in when the component mounts
   useEffect(() => {
-    const token = localStorage.getItem("authToken"); // Change token name to 'authToken'
+    const token = localStorage.getItem("authToken");
     if (token) {
-      setIsLoggedIn(true); // If token exists, user is logged in
+      setIsLoggedIn(true);
     }
   }, []);
 
-  // Handle login (for storing token and user ID)
-  const handleLogin = async (email, password) => {
-    try {
-      const response = await axios.post("http://localhost/api/login", { email, password });
-      const { token, user } = response.data; // Extract token and user from response
-      const { id } = user; // Extract id from user object
-
-      // Store token and user ID in local storage
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", id);
-
-      setIsLoggedIn(true); // Update login state
-      navigate("/"); // Redirect to home page after login
-    } catch (error) {
-      console.error("Login failed", error);
-    }
-  };
-
-  // Handle logout
   const handleLogout = async () => {
-    const token = localStorage.getItem("authToken"); // الحصول على التوكن
-    if (!token) {
-      console.error("No token found for logout.");
-      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن هناك توكن
-      return;
-    }
-
-    try {
-      // إرسال طلب للخروج إذا كان لديك API خاص بالخروج
-      await axios.post("http://localhost:8000/api/logout", null, {
-        headers: {
-          Authorization: `Bearer ${token}`, // إرسال التوكن مع الطلب
-        },
-      });
-
-      // If logout is successful
-      localStorage.removeItem("authToken"); // Remove token from local storage
-      localStorage.removeItem("userId"); // Remove user ID from local storage
-      setIsLoggedIn(false); // Update login state
-      navigate("/"); // Redirect to home page after logout
-    } catch (error) {
-      console.error("Logout failed on server:", error);
-    } finally {
-      // في كل الحالات، قم بحذف التوكن وإعادة التوجيه
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userId");
-      setIsLoggedIn(false);
-      navigate("/login"); // إعادة التوجيه إلى صفحة تسجيل الدخول
-    }
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    closeMenu(); // إغلاق القائمة بعد تسجيل الخروج
+    navigate("/login");
   };
 
   return (
@@ -79,35 +35,47 @@ function Navbar() {
           <h2>Tayeb</h2>
         </div>
 
-          {/* Navigation links in the middle */}
-          <span className="hamburger-btn" onClick={toggleMenu}>
-            ☰
-          </span>
-          <ul className={`links ${menuOpen ? "show" : ""}`}>
-          <li className="nav-item"><Link to="/">Home</Link></li>
-          <li className="nav-item"><Link to="/about">About</Link></li>
+        <span className="hamburger-btn" onClick={toggleMenu}>
+          ☰
+        </span>
+
+        <ul className={`links ${menuOpen ? "show" : ""}`}>
           <li className="nav-item">
-            <Link to="/favorites" state={{ favorites }}>
+            <Link to="/" onClick={closeMenu}>
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/about" onClick={closeMenu}>
+              About
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/favorites" onClick={closeMenu}>
               Favorites
             </Link>
           </li>
-          <li className="nav-item"><Link to={`/user/${localStorage.getItem('userId')}`}>Profile</Link></li>
-       
+          <li className="nav-item">
+            <Link to={`/user/${localStorage.getItem("userId")}`} onClick={closeMenu}>
+              Profile
+            </Link>
+          </li>
 
-          {/* Conditionally render login/logout buttons */}
           {isLoggedIn ? (
             <li className="nav-item">
-              <button className="btn" onClick={handleLogout}>Logout</button>
+              <button className="btn" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           ) : (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
+                <Link to="/login" onClick={closeMenu}>
                   Login
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/register">
+                <Link to="/register" onClick={closeMenu}>
                   Register
                 </Link>
               </li>
