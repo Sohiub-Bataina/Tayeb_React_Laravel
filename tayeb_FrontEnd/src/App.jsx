@@ -20,6 +20,7 @@ import UserProfile from "./components/UserProfile";
 import Footer from "./components/Footer";
 import About from "./components/about/About";
 
+
 function App() {
   const [favorites, setFavorites] = useState([]);
   const userId = localStorage.getItem("userId");
@@ -118,6 +119,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<AuthForm />} />
         <Route path="/user/:id" element={<UserProfile />} />
+       
       </Routes>
       <Footer /> 
       <ToastContainer />
