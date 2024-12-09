@@ -54,8 +54,8 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33' ,
+            cancelButtonColor:'#3085d6',
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -119,7 +119,17 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
                     e.currentTarget.style.boxShadow = "none";
                 }}
             >
-                <img src={showImage(blog.image)} className='card-img-top' alt="Blog" />
+                <img
+                    src={showImage(blog.image)}
+                    className="card-img-top"
+                    alt="Blog"
+                    style={{
+                        width: '100%', // عرض الصورة لتملأ العرض
+                        height: '200px', // ارتفاع الصورة الموحد
+                        objectFit: 'cover', // اقتصاص الصورة لتناسب الإطار
+                        objectPosition: 'center', // موضع الصورة داخل الإطار
+                    }}
+                />
                 <div className='card-body d-flex flex-column'>
                     <h2 className='h5'>{blog.title}</h2>
                     <p className='flex-grow-1'>{blog.shortDesc}</p>
@@ -168,17 +178,17 @@ const BlogCard = ({ blog, blogs, setBlogs, toggleFavorite, liked }) => {
                                 </>
                             )}
                             <button className='btn' onClick={handleLike}>
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="28"
-        fill={isLiked ? "red" : "gray"} // Heart is filled red when liked
-        className="bi bi-heart"
-        viewBox="0 0 16 16"
-    >
-        <path d="M8 15s6-4.35 6-7.5C14 5.01 11.74 3 9 3c-1.74 0-3 1.51-3 1.51S4.74 3 3 3C.26 3 0 5.01 0 7.5 0 10.65 8 15 8 15z" />
-    </svg>
-</button>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="28"
+                                    fill={isLiked ? "red" : "gray"} // Heart is filled red when liked
+                                    className="bi bi-heart"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path d="M8 15s6-4.35 6-7.5C14 5.01 11.74 3 9 3c-1.74 0-3 1.51-3 1.51S4.74 3 3 3C.26 3 0 5.01 0 7.5 0 10.65 8 15 8 15z" />
+                                </svg>
+                            </button>
 
                         </div>
                     </div>

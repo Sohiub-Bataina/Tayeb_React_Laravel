@@ -1,15 +1,26 @@
+
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Navbar.css";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // حالة لتتبع ما إذا كانت القائمة مفتوحة أم لا
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+
+
+
+
+
+
   const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false); // دالة لإغلاق القائمة
+
 
   // دالة لجلب بيانات المستخدم
   const getUserData = () => {
@@ -22,14 +33,19 @@ function Navbar() {
     return { userName, userGender, userAvatar };
   };
 
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
       setIsLoggedIn(true);
     }
+
   }, [setIsLoggedIn]); // تأكد من أن حالة الدخول تتحدث بشكل صحيح
 
   const { userName, userAvatar } = getUserData();
+
+  }, []);
+
 
   const handleLogout = async () => {
     localStorage.removeItem("authToken");
@@ -43,6 +59,7 @@ function Navbar() {
     <header>
       <nav className="navbar">
         <div className="logo" style={{ color: "orange" ,fontFamily: "Arial, sans-serif" }}>
+
 
           <Link to="/" ><i className="fas fa-utensils me-2" style={{ color: "orange" }}>&nbsp;Tayeb</i></Link>
         </div>
@@ -73,6 +90,7 @@ function Navbar() {
               <li>
                 <Link to="/favorites" onClick={closeMenu}>
                   Favorites
+
                 </Link>
               </li>
               

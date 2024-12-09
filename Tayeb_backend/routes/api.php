@@ -39,6 +39,7 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/favorites/toggle', [FavoriteController::class, 'toggle']);
 Route::get('/favorites', [FavoriteController::class, 'index']);
 
+
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 // Route::post('register',[ApiController::class,'register']);

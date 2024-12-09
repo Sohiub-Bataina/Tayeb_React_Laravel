@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Poppins', sans-serif;
   color: #fff;
@@ -157,13 +158,119 @@ header {
   .links .nav-item button {
     text-align: center;
     width: 100%;
-  }
+=======
+/* إعادة تعيين بعض الأنماط الافتراضية */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding-top: 60px; /* إضافة مسافة علويّة لتفادي تداخل مع الشريط الثابت */
+}
 
+/* تصميم شريط التنقل */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* إبقاء الشعار على اليسار وبقية العناصر في المنتصف */
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed; /* يجعل الشريط ثابتًا في أعلى الصفحة */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* تحديد ترتيب العنصر فوق العناصر الأخرى */
+}
+
+/* تصميم الشعار */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo h2 {
+  margin-left: 10px;
+  font-size: 1.5rem;
+  color: orange; /* لون الشعار */
+}
+
+/* تصميم زر القائمة (الهامبرغر) */
+.hamburger-btn {
+  display: none; /* مخفي افتراضيًا، يظهر على الشاشات الصغيرة */
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* تصميم الروابط */
+.links {
+  display: flex;
+  list-style: none; /* إزالة النقاط من القائمة */
+  margin: 0;
+  padding: 0;
+  justify-content: center; /* محاذاة الروابط في المنتصف */
+  flex-grow: 1; /* تأخذ المساحة المتبقية بين الشعار والعناصر الأخرى */
+}
+
+.links .nav-item {
+  margin-left: 20px;
+}
+
+/* تنسيق الروابط والأزرار */
+.links .nav-item a,
+.links .nav-item button {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.links .nav-item a:hover,
+.links .nav-item button:hover {
+  color: #fbb03b; /* تغيير اللون عند التمرير */
+}
+
+/* استجابة التصميم للشاشات الصغيرة */
+@media (max-width: 768px) {
+  /* إظهار زر القائمة على الشاشات الصغيرة */
   .hamburger-btn {
     display: block;
   }
 
+  /* إخفاء الروابط افتراضيًا */
+  .links {
+    display: none;
+    flex-direction: column; /* ترتيب الروابط عموديًا */
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #333;
+    border-radius: 5px;
+    width: 200px;
+    z-index: 1000;
+  }
+
+  /* إظهار القائمة عند إضافة الصنف "show" */
+  .links.show {
+    display: flex;
+
+  }
+
+  /* تنسيق الروابط عند عرضها عموديًا */
+  .links .nav-item {
+    margin: 10px 0;
+  }
+
+
   .action-buttons {
     display: none; /* Hide action buttons on mobile */
+
+  .links .nav-item a,
+  .links .nav-item button {
+    text-align: center; /* محاذاة النصوص في المنتصف */
+    width: 100%;
+
   }
 }

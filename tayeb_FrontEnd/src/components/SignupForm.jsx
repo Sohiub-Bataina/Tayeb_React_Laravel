@@ -113,7 +113,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
             name="confirmPassword"
             placeholder="Confirm Password"
             value={formData.confirmPassword}
-            onChange={handleInputChange}
+            onKeyChange={handleInputChange}
             required
           />
           {errors.confirmPassword && (
