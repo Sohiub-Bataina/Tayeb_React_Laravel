@@ -1,71 +1,74 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import './AuthForm.css';
 
 const LoginForm = ({ onSwitchToSignup }) => {
+  const { setIsLoggedIn } = useContext(AuthContext); // استخدم السياق لتحديث حالة تسجيل الدخول
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
 
-  // استخدام useEffect للتحقق من حالة تسجيل الدخول
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
       navigate("/"); // إذا كان الرمز موجودًا، انتقل إلى الصفحة الرئيسية
     }
-  }, [navigate]);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    validateField(name, value); // التحقق من الأخطاء أثناء الكتابة
+  };
+
+  const validateField = (fieldName, value) => {
+    const newErrors = { ...errors };
+
+    if (fieldName === "email") {
+      if (!value) {
+        newErrors.email = "Email is required.";
+      } else if (!/\S+@\S+\.\S+/.test(value)) {
+        newErrors.email = "Please type a valid email address.";
+      } else {
+        delete newErrors.email;
+      }
+    }
+
+    if (fieldName === "password") {
+      if (!value) {
+        newErrors.password = "Password is required.";
+      } else if (value.length < 8) {
+        newErrors.password = "Password must be at least 8 characters.";
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    setErrors(newErrors);
   };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formData;
-
-    // Initialize an empty errors object
-    const newErrors = {};
-
-    // Validate email
-    if (!email) {
-      newErrors.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Please type a valid email address.";
-    }
-
-    // Validate password
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters.";
-    }
-
-    // If there are any validation errors, update the errors state and stop submission
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
 
     try {
       const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
+        email: formData.email,
+        password: formData.password,
       });
 
       const { token, user } = response.data;
       const { id } = user;
 
-      // Store token and user ID in local storage
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
 
-
       setSuccessMessage("Login successful!");
-      navigate("/"); // الانتقال إلى الصفحة الرئيسية بعد تسجيل الدخول
+      setIsLoggedIn(true);
+      navigate("/");
     } catch (error) {
       setErrors({ login: "Invalid credentials!" });
     }
@@ -84,6 +87,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
             value={formData.email}
             onChange={handleInputChange}
             required
+            className={errors.email ? "hasError" : ""}
           />
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
@@ -95,6 +99,7 @@ const LoginForm = ({ onSwitchToSignup }) => {
             value={formData.password}
             onChange={handleInputChange}
             required
+            className={errors.password ? "hasError" : ""}
           />
           {errors.password && <span className="error">{errors.password}</span>}
         </div>

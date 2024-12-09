@@ -83,8 +83,8 @@ const CreateBlog = () => {
 
     return (
         <div className='container mb-5'>
-            <div className="d-flex justify-content-between pt-5 mb-4">
-                <h4>Create Blog</h4>
+            <div className="d-flex justify-content-between pt-5 mb-4" style={{ marginTop: '20px' }}>
+            <h4 >Create Blog</h4>
                 <a href='/' className='btn btn-dark'>Back</a>
             </div>
             <div className='card border-0 shadow-lg'>

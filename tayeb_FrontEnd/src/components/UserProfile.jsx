@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BlogCard from './BlogCard'; // افترض أن لديك مكون BlogCard لعرض المدونات
+import Swal from 'sweetalert2';
 
 const UserProfile = () => {
   const userId = localStorage.getItem('userId'); // قراءة userId من localStorage
@@ -58,17 +59,39 @@ const UserProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (user.name.length > 100) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Name cannot exceed 100 characters.',
+      });
+      return;
+    }
+  
     try {
       const response = await axios.put(`http://localhost:8000/api/users/${userId}`, user, {
         headers: {
           Authorization: `Bearer YOUR_ACCESS_TOKEN`, // ضع التوكن إذا كان مطلوبًا
         },
       });
-      alert(response.data.message);
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data.message,
+      }).then(() => {
+        window.location.reload(); // Reload the page
+      });
+  
       setIsEditing(false);
     } catch (err) {
       console.error('Error updating user data:', err);
-      alert('Failed to update profile.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to update profile.',
+      });
     }
   };
 
@@ -102,7 +125,10 @@ const UserProfile = () => {
           borderRadius: '10px',
           boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
           padding: '20px',
-          marginBottom: '20px',
+          // marginBottom: '20px',
+          marginTop:'50px',
+          marginBottom: '50px',
+
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -127,6 +153,7 @@ const UserProfile = () => {
                   name="name"
                   value={user.name}
                   onChange={handleInputChange}
+                  maxLength="100"
                   style={{
                     width: '100%',
                     padding: '12px',
@@ -237,4 +264,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
