@@ -3,21 +3,22 @@ import Editor from 'react-simple-wysiwyg';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const EditBlog = () => {
     const [blog, setBlog] = useState([]);
+    const [html, setHtml] = useState('');
+    const [imageId, setImageId] = useState('');
+    const [author, setAuthor] = useState(''); // حالة لتخزين اسم المستخدم
     const params = useParams();
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm();
-
-    const [html, setHtml] = useState('');
-    const [imageId, setImageId] = useState('');
-
-    const navigate = useNavigate();
 
     function onChange(e) {
         setHtml(e.target.value);
@@ -41,19 +42,32 @@ const EditBlog = () => {
         } else {
             setImageId(result.image.id);
         }
-    }
+    };
+
+    const fetchAuthor = async () => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            setAuthor("Unknown Author");
+            return;
+        }
+
+        try {
+            const response = await axios.get(`http://localhost:8000/api/users/${userId}`);
+            setAuthor(response.data.name); // تعيين اسم المؤلف من البيانات المسترجعة
+        } catch (error) {
+            console.error("Error fetching author data:", error);
+            setAuthor("Unknown Author");
+        }
+    };
 
     const fetchBlog = async () => {
         const res = await fetch("http://localhost:8000/api/blogs/" + params.id);
         const result = await res.json();
 
-        // Log the response to see the data
-        console.log("Blog data:", result);
-
         setBlog(result.data);
         setHtml(result.data.description);
         reset(result.data);
-    }
+    };
 
     const formSubmit = async (data) => {
         const userId = localStorage.getItem("userId"); // Retrieve user ID from local storage
@@ -64,7 +78,7 @@ const EditBlog = () => {
             return;
         }
 
-        const newData = { ...data, "description": html, image_id: imageId };
+        const newData = { ...data, "description": html, image_id: imageId, author };
 
         const res = await fetch("http://localhost:8000/api/blogs/" + params.id, {
             method: "PUT",
@@ -82,9 +96,10 @@ const EditBlog = () => {
         } else {
             toast("Failed to update blog.");
         }
-    }
+    };
 
     useEffect(() => {
+        fetchAuthor(); // استدعاء جلب المؤلف عند تحميل المكون
         fetchBlog();
     }, []);
 
@@ -98,25 +113,41 @@ const EditBlog = () => {
                 <form onSubmit={handleSubmit(formSubmit)}>
                     <div className='card-body'>
                         <div className="mb-3">
-                            <label className='form-label'>Title</label>
+                            <label className='form-label'>Recipe Name</label>
                             <input 
                                 { ...register('title', { required: true }) } 
                                 type="text" 
                                 className={`form-control ${errors.title && 'is-invalid'}`} 
-                                placeholder='Title' />
-                            {errors.title && <p className='invalid-feedback'>Title field is required</p>}
+                                placeholder='Recipe Name'
+                                maxLength={30} />
+                            {errors.title && <p className='invalid-feedback'>Recipe Name field is required</p>}
                         </div>
                         <div className="mb-3">
-                            <label className='form-label'>Short Description</label>
+                            <label className='form-label'>Recipe Highlights </label>
                             <textarea 
                                 { ...register('shortDesc') } 
-                                cols="30" rows="5" className='form-control'></textarea>
+                                cols="30" rows="5" className='form-control' maxLength={100}></textarea>
                         </div>
                         <div className="mb-3">
-                            <label className='form-label'>Description</label>
-                            <Editor value={html} 
-                                containerProps={{ style: { height: '700px' } }}
-                                onChange={onChange} />
+                            <label className="form-label">Description</label>
+                            <div
+                                style={{
+                                    height: '200px', 
+                                    minHeight: '100px', 
+                                    maxHeight: '500px', 
+                                    resize: 'vertical', 
+                                    overflow: 'auto', 
+                                    border: '1px solid #ddd',
+                                    padding: '10px', 
+                                    borderRadius: '5px',
+                                }}
+                            >
+                                <Editor
+                                    value={html}
+                                    containerProps={{ style: { height: '100%' } }}
+                                    onChange={onChange}
+                                />
+                            </div>
                         </div>
                         <div className='mb-3'>
                             <label className='form-label'>Image</label><br/>
@@ -128,18 +159,18 @@ const EditBlog = () => {
                         <div className="mb-3">
                             <label className='form-label'>Author</label>
                             <input 
-                                { ...register('author', { required: true }) } 
                                 type="text" 
-                                className={`form-control ${errors.author && 'is-invalid'}`} 
-                                placeholder='Author' />
-                            {errors.author && <p className='invalid-feedback'>Author field is required</p>}
+                                className='form-control' 
+                                value={author} // عرض اسم المؤلف فقط
+                                readOnly 
+                            />
                         </div>
                         <button className='btn btn-dark'>Update</button>
                     </div>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default EditBlog;
