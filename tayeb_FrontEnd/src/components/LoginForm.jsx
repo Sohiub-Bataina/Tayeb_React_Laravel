@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import './AuthForm.css';
 
-
 const LoginForm = ({ onSwitchToSignup }) => {
   const { setIsLoggedIn } = useContext(AuthContext); // استخدم السياق لتحديث حالة تسجيل الدخول
   const navigate = useNavigate();
@@ -57,12 +56,8 @@ const LoginForm = ({ onSwitchToSignup }) => {
 
     try {
       const response = await axios.post("http://localhost:8000/api/login", {
-
-        name: formData.name,
         email: formData.email,
         password: formData.password,
-        gender: formData.gender,
-
       });
 
       const { token, user } = response.data;
@@ -70,14 +65,6 @@ const LoginForm = ({ onSwitchToSignup }) => {
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
-
-
-   
-
-
-    localStorage.setItem("userName", user.name);
-    localStorage.setItem("userGender", user.gender);
-
 
       setSuccessMessage("Login successful!");
       setIsLoggedIn(true);

@@ -1,164 +1,3 @@
-
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  position: relative;
-  margin: 0;
-  padding-top: 60px; /* Adjust for fixed navbar */
-}
-
-/* Header Styling */
-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-  height: 0px; /* Reduced height */
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px; /* Reduced padding */
-  background-color: rgba(0, 0, 0, 0.858); /* Dark background with transparency */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 60px; /* Reduced height */
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo i {
-  font-size: 28px;
-  margin-right: 10px;
-  color: #fbb03b;
-}
-
-.logo h2 {
-  font-size: 24px; /* Slightly smaller font size */
-  font-weight: bold;
-  color: #fbb03b;
-  margin: 0;
-}
-
-/* Navigation Links */
-.links {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-  flex-grow: 1;
-  justify-content: center;
-}
-
-.links li a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.links li a:hover {
-  color: #fbb03b;
-}
-
-/* Action Buttons */
-.action-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.action-buttons .btn {
-  padding: 8px 18px; /* Adjusted padding */
-  font-size: 14px; /* Smaller font size */
-  color: #fff;
-  background-color: #fbb03b;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.action-buttons .btn:hover {
-  background-color: #333;
-  color: #fbb03b;
-}
-
-/* Hamburger Button for Mobile */
-.hamburger-btn {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: #fff;
-}
-
-/* Hero Section */
-.hero-section {
-  background-image: url("../assets/images/bg_1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  height: 100vh;
-}
-
-.heroH, .heroP {
-  font-size: 36px;
-  margin-bottom: 20px;
-  color: #000000;
-}
-
-.hero-content {
-  text-align: center;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-  .navbar {
-    position: fixed; /* Keep navbar fixed on top */
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  .logo h2 {
-    font-size: 1.2rem;
-  }
-
-  .links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    width: 100%;
-    height: calc(100vh - 60px);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .links.show {
-    display: flex;
-  }
-
-  .links .nav-item {
-    margin: 10px 0;
-  }
-
-  .links .nav-item a,
-  .links .nav-item button {
-    text-align: center;
-    width: 100%;
-=======
 /* إعادة تعيين بعض الأنماط الافتراضية */
 body {
   margin: 0;
@@ -255,7 +94,6 @@ body {
   /* إظهار القائمة عند إضافة الصنف "show" */
   .links.show {
     display: flex;
-
   }
 
   /* تنسيق الروابط عند عرضها عموديًا */
@@ -263,14 +101,9 @@ body {
     margin: 10px 0;
   }
 
-
-  .action-buttons {
-    display: none; /* Hide action buttons on mobile */
-
   .links .nav-item a,
   .links .nav-item button {
     text-align: center; /* محاذاة النصوص في المنتصف */
     width: 100%;
-
   }
 }
