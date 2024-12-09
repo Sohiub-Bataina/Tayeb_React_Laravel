@@ -21,6 +21,7 @@ class BlogController extends Controller
     
             // استعلام المدونات
             $blogs = Blog::query();
+            $blogs = Blog::orderBy('created_at', 'DESC');
     
             // إذا وُجدت كلمة مفتاحية، يتم إضافة شروط البحث
             if ($keyword) {
@@ -68,9 +69,10 @@ class BlogController extends Controller
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|min:1',
-            'author' => 'required|min:3'
+            'author' => 'required|min:3',
+            'create_user_id' => 'required|exists:users,id' // Validate that the user ID exists
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -78,16 +80,16 @@ class BlogController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
-
-        $user = User::find($request->create_user_id ?? 3);
-
+    
+        $user = User::find($request->create_user_id);
+    
         if (!$user) {
             return response()->json([
                 'status' => false,
                 'message' => 'User not found.',
             ]);
         }
-
+    
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->author = $request->author;
@@ -97,24 +99,24 @@ class BlogController extends Controller
         $blog->create_user_id = $user->id;
         $blog->image = $request->image ?? null; // Default to null if not provided
         $blog->save();
-
+    
         // Save Image Here
         $tempImage = TempImage::find($request->image_id);
-
+    
         if ($tempImage != null) {
             $imageExtArray = explode('.', $tempImage->name);
             $ext = last($imageExtArray);
             $imageName = time() . '-' . $blog->id . '.' . $ext;
-
+    
             $blog->image = $imageName;
             $blog->save();
-
+    
             $sourcePath = public_path('uploads/temp/' . $tempImage->name);
             $destPath = public_path('uploads/blogs/' . $imageName);
-
+    
             File::copy($sourcePath, $destPath);
         }
-
+    
         return response()->json([
             'status' => true,
             'message' => 'Blog added successfully.',

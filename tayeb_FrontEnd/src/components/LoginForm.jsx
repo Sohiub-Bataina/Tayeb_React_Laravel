@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import './AuthForm.css';
+import './AuthForm';
 
 const LoginForm = ({ onSwitchToSignup }) => {
   const { setIsLoggedIn } = useContext(AuthContext); // استخدم السياق لتحديث حالة تسجيل الدخول
@@ -56,15 +56,25 @@ const LoginForm = ({ onSwitchToSignup }) => {
 
     try {
       const response = await axios.post("http://localhost:8000/api/login", {
+        name: formData.name,
         email: formData.email,
         password: formData.password,
+        gender: formData.gender,
       });
 
       const { token, user } = response.data;
       const { id } = user;
-
-      localStorage.setItem("authToken", token);
+localStorage.setItem("authToken", token);
       localStorage.setItem("userId", id);
+
+     
+
+    // تخزين البيانات في localStorage
+    localStorage.setItem("token", token);
+    localStorage.setItem("ID", user.id);
+
+    localStorage.setItem("userName", user.name);
+    localStorage.setItem("userGender", user.gender);
 
       setSuccessMessage("Login successful!");
       setIsLoggedIn(true);
