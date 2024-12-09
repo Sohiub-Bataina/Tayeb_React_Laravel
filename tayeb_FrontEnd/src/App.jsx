@@ -119,7 +119,7 @@ function App() {
         <Route path="/login" element={<AuthForm />} />
         <Route path="/user/:id" element={<UserProfile />} />
       </Routes>
-      <Footer /> إضافة الفوتر هنا
+      <Footer /> 
       <ToastContainer />
     </AuthProvider>
   );
