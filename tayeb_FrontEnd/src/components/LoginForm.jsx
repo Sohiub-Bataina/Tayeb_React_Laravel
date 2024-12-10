@@ -88,7 +88,7 @@ localStorage.setItem("authToken", token);
     <div className="login form-piece">
       {successMessage && <p className="success">{successMessage}</p>}
       <form onSubmit={handleLoginSubmit}>
-        <h1>Sign In!</h1>
+      <h1 style={{ color: 'black' }}>Sign In!</h1>
         <div className="form-group">
           <input
             type="email"
