@@ -83,7 +83,7 @@ const AuthForm = () => {
           ) : (
             <div className="signup form-peice">
               <form onSubmit={handleSignupSubmit}>
-                <h3>Sign Up!</h3>
+                <h3 style={{ color: 'black' }}>Sign Up!</h3>
                 <div className="form-group">
                   <label htmlFor="name"></label>
                   <input

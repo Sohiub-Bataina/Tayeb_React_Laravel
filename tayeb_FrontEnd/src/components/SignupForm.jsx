@@ -58,7 +58,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
     <div className="signup form-piece">
       {successMessage && <p className="success">{successMessage}</p>}
       <form onSubmit={handleSignupSubmit}>
-        <h3>Sign Up!</h3>
+        <h3 style={{ color: 'black' }}>Sign Up!</h3>
         <div className="form-group">
           <input
             type="text"
