@@ -61,7 +61,7 @@ function Navbar() {
             <>
             <li>
                 <Link to="/" onClick={closeMenu}>
-                  HOME
+                  Home
                 </Link>
               </li>
             
