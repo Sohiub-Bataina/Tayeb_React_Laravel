@@ -24,7 +24,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 15px 40px;
-  background-color: rgba(0, 0, 0, 0.858); /* Dark background with transparency */
+  background-color: rgba(0, 0, 0); /* Dark background with transparency */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: 70px;
 }
@@ -96,7 +96,13 @@ header {
   display: none;
   font-size: 30px;
   cursor: pointer;
-  color: #fff;
+  color:black;
+  background-color: #fbb03b;
+  position: relative;
+  left:1px;
+  border: none;
+  outline: none;
+
 }
 
 /* Hero Section */
@@ -234,10 +240,67 @@ header {
   }
 
   .hamburger-btn {
-    display: block;
-  }
+  
+   display: block;
+            position: relative;
+            left: 90px;
+        }
+  
 
   .action-buttons {
     display: none; /* Hide action buttons on mobile */
   }
+ /* القائمة المنسدلة الافتراضية */
+.dropdown-menu {
+  display: contents;; /* إخفاء القائمة المنسدلة افتراضيًا */
+
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: calc(100vh - 60px);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+/* تنسيق الروابط داخل القائمة */
+.dropdown-menu a,
+.dropdown-menu button {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  color: #fbb03b;
+  background-color: #333;
+}
+
+
+/* على الأجهزة الصغيرة */
+@media (max-width: 768px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .links {
+    display: none; /* إخفاء القائمة الرئيسية */
+  }
+
+  .hamburger-btn {
+    display: block; /* عرض زر الهامبرجر */
+  }
+}
+
 }

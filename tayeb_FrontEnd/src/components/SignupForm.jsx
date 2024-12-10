@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import axios from "axios";
 import './AuthForm.css';
 
@@ -27,7 +27,6 @@ const SignupForm = ({ onSwitchToLogin }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -38,7 +37,7 @@ const SignupForm = ({ onSwitchToLogin }) => {
           password: formData.password,
           gender: formData.gender,
         });
-  
+
         // Save user details in localStorage
         localStorage.setItem("userName", response.data.name); // Assuming API returns 'name'
         localStorage.setItem("userGender", response.data.gender); // Assuming API returns 'gender'
@@ -53,10 +52,10 @@ const SignupForm = ({ onSwitchToLogin }) => {
       }
     }
   };
-  
+
   return (
     <div className="signup form-piece">
-      {successMessage && <p className="success">{successMessage}</p>}
+      {successMessage && <p className="success" style={{ color: 'black' }}>{successMessage}</p>}
       <form onSubmit={handleSignupSubmit}>
         <h3 style={{ color: 'black' }}>Sign Up!</h3>
         <div className="form-group">

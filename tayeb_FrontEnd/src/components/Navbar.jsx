@@ -10,6 +10,7 @@ function Navbar() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false); // دالة لإغلاق القائمة
+  
 
   // دالة لجلب بيانات المستخدم
   const getUserData = () => {
@@ -91,7 +92,9 @@ function Navbar() {
                 </div>
                 {menuOpen && (
                   <div className="dropdown-menu">
-                    <Link to={`/user/${localStorage.getItem("userId")}`} onClick={closeMenu}>
+                    <Link to={`/user/${localStorage.getItem("userId")}`} onClick={closeMenu} 
+                    className="profile"
+                    >
                     Profile
                     </Link>
                     <button onClick={handleLogout}>Logout</button>
