@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import BlogCard from './BlogCard'; // استيراد مكون BlogCard
 import { useNavigate } from 'react-router-dom'; // لإعادة التوجيه عند الحاجة
 import HeroFavorite from "./HeroFavorite";
@@ -71,7 +71,7 @@ const FavoritesPage = () => {
                         />
                     ))
                 ) : (
-                    <p>No favorites found</p>
+                    <p style={{ color: 'black' }}>No favorites found</p>
                 )}
             </div>
         </div>
